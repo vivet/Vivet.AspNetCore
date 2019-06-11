@@ -33,4 +33,4 @@ deploy:
   server: $(NUGET_HOST)
   api_key: $(NUGET_APIKEY)
   on:
-    branch: master-disable
+    branch: master
