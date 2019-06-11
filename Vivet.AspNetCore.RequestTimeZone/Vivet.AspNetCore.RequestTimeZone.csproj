@@ -1,36 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <RepositoryType>Github</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/vivet/Vivet.AspNetCore/master/LICENSE.txt</PackageLicenseUrl>
+    <License>LICENSE</License>
     <Product>AspNetCore RequestTimeZone</Product>
     <Authors>Michael Vivet</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.1.0</Version>
+    <PackageTags>asp netcore http request timezone middleware</PackageTags>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningsAsErrors />
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn />
     <DocumentationFile>bin\Release\netcoreapp2.0\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningsAsErrors />
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn />
     <DocumentationFile>bin\Debug\netcoreapp2.0\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+  </ItemGroup>
 </Project>
