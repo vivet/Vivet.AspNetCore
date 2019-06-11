@@ -11,6 +11,8 @@
     <Authors>Michael Vivet</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Configuration and middleware for handling request timezone.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
