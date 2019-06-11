@@ -1,0 +1,11 @@
+*.user
+*.userprefs
+*.suo
+_ReSharper*
+**/bin
+**/obj
+*.DotSettings
+packages
+.vs
+project.lock.json
+TestResults*
