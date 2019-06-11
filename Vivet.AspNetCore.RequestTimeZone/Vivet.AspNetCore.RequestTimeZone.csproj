@@ -6,11 +6,11 @@
     <RepositoryType>Github</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/vivet/Vivet.AspNetCore/master/LICENSE.txt</PackageLicenseUrl>
     <Product>AspNetCore RequestTimeZone</Product>
     <Authors>Michael Vivet</Authors>
     <NeutralLanguage>en</NeutralLanguage>
-    <Description>Configuration and middleware for handling request timezone.</Description>
+    <Description>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
