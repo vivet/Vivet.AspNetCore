@@ -2,7 +2,7 @@
 A collection of AspNetCore components.  
 
 ### Table of Contents
-* [Vivet.AspNetCore.RequestTimeZone](#Vivet.AspNetCore.RequestTimeZone)  
+* [Vivet.AspNetCore.RequestTimeZone](#vivetaspnetCorerequesttimeZone)  
 
 ***
 
