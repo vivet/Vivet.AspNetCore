@@ -27,6 +27,17 @@ To configure the Request TimeZone Middleware, first add the required services to
 services
   .AddRequestTimeZone("myDefaultTimeZone");
 ```
+Or,
+```csharp
+services
+  .AddRequestTimeZone(x => 
+  {
+    x.DefaultRequestTimeZone = new RequestTimeZone("myDefaultTimeZone");
+    
+    // Additional configuration.
+  });
+```
+
 Next, register the middleware in the pipeline, as shown below.   
 ```csharp
 applicationBuilder
