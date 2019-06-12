@@ -16,7 +16,7 @@ Middleware to configure request timezone options.
 The current timezone on a request is set in the Request TimeZone Middleware. The middleware is enabled in the Startup.Configure method, and on every request the list of RequestTimeZoneProvider in the RequestTimeZoneOptions is enumerated and the first provider that can successfully determine the request timezone is used. The default providers come from the RequestTimeZoneOptions class:  
 
 * QueryStringRequestTimeZoneProvider (```?tz=myTimezone```)
-* HeaderRequestTimeZoneProvider (```Key: TZ```)
+* HeaderRequestTimeZoneProvider (```TZ=myTimezone```)
 * CookieRequestTimeZoneProvider
 
 The default list goes from most specific to least specific. You can change the order and even add a custom timezone provider, similar to ```Microsoft.AspNetCore.Localization```. If none of the providers can determine the request timezone, the ```DefaultRequestTimeZone``` is used.  
