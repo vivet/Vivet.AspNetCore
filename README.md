@@ -32,9 +32,7 @@ Or,
 services
   .AddRequestTimeZone(x => 
   {
-    x.DefaultRequestTimeZone = new RequestTimeZone("myDefaultTimeZone");
-    
-    // Additional configuration.
+    // Configuration.
   });
 ```
 
