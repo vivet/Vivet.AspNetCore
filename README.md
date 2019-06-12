@@ -44,5 +44,7 @@ applicationBuilder
   .UseRequestTimeZone();
 ```
 
+The middleware is now configured in the pipeline, and will register request timezone when suplied by one of the configured providers.
+
 ***
 
