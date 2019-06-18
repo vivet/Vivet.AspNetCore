@@ -12,7 +12,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// <summary>
         /// The header key that contains the timezone name.
         /// </summary>
-        public virtual string Headerkey { get; set; } = "tz";
+        public static string Headerkey { get; set; } = "tz";
 
         /// <inheritdoc />
         public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
@@ -21,7 +21,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
                 throw new ArgumentNullException(nameof(httpContext));
 
             var value = httpContext.Request
-                .Headers[this.Headerkey];
+                .Headers[RequestTimeZoneHeaderProvider.Headerkey];
 
             if (string.IsNullOrEmpty(value))
                 return RequestTimeZoneProvider.nullProviderTimeZoneResult;

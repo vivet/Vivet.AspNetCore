@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone
@@ -9,7 +8,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
     /// </summary>
     public class RequestTimeZoneOptions
     {
-        private RequestTimeZone defaultRequestTimeZone = new RequestTimeZone("Etc/UTC");
+        private readonly RequestTimeZone defaultRequestTimeZone = new RequestTimeZone("UTC");
 
         /// <summary>
         /// Gets or sets the default timezone to use for requests.
@@ -18,13 +17,30 @@ namespace Vivet.AspNetCore.RequestTimeZone
         {
             get
             {
-                return this.defaultRequestTimeZone;
-            }
-            set
-            {
-                this.defaultRequestTimeZone = value ?? throw new ArgumentNullException(nameof(value));
+                if (string.IsNullOrEmpty(this.Id))
+                    return this.defaultRequestTimeZone;
+
+                return new RequestTimeZone(this.Id);
             }
         }
+
+        /// <summary>
+        /// Id.
+        /// The timezone identifier.
+        /// </summary>
+        public virtual string Id { get; set; }
+
+        /// <summary>
+        /// Enable Request To Utc.
+        /// Enables conversion of date time values in request to UTC.
+        /// </summary>
+        public virtual bool EnableRequestToUtc { get; set; }
+
+        /// <summary>
+        /// Enable Response To Local.
+        /// Enables conversion of date time values in response to local.
+        /// </summary>
+        public virtual bool EnableResponseToLocal { get; set; }
 
         /// <summary>
         /// An ordered list of providers used to determine a request's timezone information.
