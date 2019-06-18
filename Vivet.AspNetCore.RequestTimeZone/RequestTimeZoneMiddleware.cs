@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
@@ -56,6 +57,8 @@ namespace Vivet.AspNetCore.RequestTimeZone
                 .Set<IRequestTimeZoneFeature>(new RequestTimeZoneFeature(requestTimeZone, winningProvider));
 
             httpContext.Response.Headers["TZ"] = requestTimeZone.TimeZone.Id;
+
+            DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => TimeZoneInfo.FindSystemTimeZoneById(requestTimeZone.TimeZone.Id));
 
             await next(httpContext);
         }

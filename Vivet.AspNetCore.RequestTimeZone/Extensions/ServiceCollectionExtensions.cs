@@ -47,6 +47,25 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                 .AddScoped<RequestTimeZone>()
                 .AddSingleton<RequestTimeZoneMiddleware>();
 
+            if (options.EnableRequestToUtc)
+            {
+                services
+                    .AddMvc(x =>
+                    {
+                        x.AddDateTimeModelBinderProvider(services); 
+                    });
+            }
+
+            if (options.EnableRequestToUtc)
+            {
+                services
+                    .AddMvc()
+                    .AddJsonOptions(x =>
+                    {
+                        x.AddDateTimeConverter(services);
+                    });
+            }
+            
             return services;
         }
     }

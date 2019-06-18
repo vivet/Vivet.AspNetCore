@@ -9,7 +9,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
     /// </summary>
     public class RequestTimeZoneOptions
     {
-        private RequestTimeZone defaultRequestTimeZone = new RequestTimeZone("Etc/UTC");
+        private RequestTimeZone defaultRequestTimeZone = new RequestTimeZone("UTC");
 
         /// <summary>
         /// Gets or sets the default timezone to use for requests.
@@ -37,6 +37,18 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// </list>
         /// </summary>
         public virtual IList<IRequestTimeZoneProvider> RequestTimeZoneProviders { get; set; }
+
+        /// <summary>
+        /// Enable Request To Utc.
+        /// Enables conversion of date time values in request to UTC.
+        /// </summary>
+        public virtual bool EnableRequestToUtc { get; set; }
+
+        /// <summary>
+        /// Enable Response To Local.
+        /// Enables conversion of date time values in response to local.
+        /// </summary>
+        public virtual bool EnableResponseToLocal { get; set; }
 
         /// <summary>
         /// Constructor.
