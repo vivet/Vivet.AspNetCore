@@ -9,7 +9,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
     public class RequestTimeZoneFeature : IRequestTimeZoneFeature
     {
         /// <inheritdoc />
-        public virtual Models.RequestTimeZone RequestTimeZone { get; }
+        public virtual RequestTimeZone RequestTimeZone { get; }
 
         /// <inheritdoc />
         public virtual IRequestTimeZoneProvider Provider { get; }
@@ -19,7 +19,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// </summary>
         /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>
         /// <param name="provider">The <see cref="IRequestTimeZoneProvider"/>.</param>
-        public RequestTimeZoneFeature(Models.RequestTimeZone requestTimeZone, IRequestTimeZoneProvider provider = null)
+        public RequestTimeZoneFeature(RequestTimeZone requestTimeZone, IRequestTimeZoneProvider provider = null)
         {
             this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
             this.Provider = provider;

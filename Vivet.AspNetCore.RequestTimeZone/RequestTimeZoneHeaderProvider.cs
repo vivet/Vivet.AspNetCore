@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Vivet.AspNetCore.RequestTimeZone.Models;
 
-namespace Vivet.AspNetCore.RequestTimeZone.Providers
+namespace Vivet.AspNetCore.RequestTimeZone
 {
     /// <summary>
-    /// Determines the timezone information for a request via the value of the 'tz' header.
+    /// Determines the timezone information for a request via the value of the 'TZ' header.
     /// </summary>
-    public class HeaderRequestTimeZoneProvider : RequestTimeZoneProvider
+    public class RequestTimeZoneHeaderProvider : RequestTimeZoneProvider
     {
         /// <summary>
         /// The header key that contains the timezone name.

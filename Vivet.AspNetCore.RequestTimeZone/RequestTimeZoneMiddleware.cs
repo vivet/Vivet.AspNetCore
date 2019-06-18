@@ -41,7 +41,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
                     if (providerTimeZoneResult == null)
                         continue;
 
-                    var result = new Models.RequestTimeZone(providerTimeZoneResult.TimeZoneName);
+                    var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
 
                     if (result.TimeZone != null)
                     {

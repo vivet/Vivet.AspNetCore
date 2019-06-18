@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
-using Vivet.AspNetCore.RequestTimeZone.Models;
 
-namespace Vivet.AspNetCore.RequestTimeZone.Providers
+namespace Vivet.AspNetCore.RequestTimeZone
 {
     /// <summary>
     /// An abstract base class provider for determining the timezone information
