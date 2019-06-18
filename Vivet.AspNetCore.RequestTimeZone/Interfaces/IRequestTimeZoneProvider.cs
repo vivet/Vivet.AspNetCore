@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Vivet.AspNetCore.RequestTimeZone.Models;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Interfaces
 {

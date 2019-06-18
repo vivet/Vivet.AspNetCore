@@ -22,7 +22,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
             services
                 .AddRequestTimeZone(x =>
                 {
-                    x.DefaultRequestTimeZone = new Models.RequestTimeZone(defaultTimeZone);
+                    x.DefaultRequestTimeZone = new RequestTimeZone(defaultTimeZone);
                 });
 
             return services;
@@ -44,6 +44,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
 
             services
                 .AddSingleton(x => options)
+                .AddScoped<RequestTimeZone>()
                 .AddSingleton<RequestTimeZoneMiddleware>();
 
             return services;

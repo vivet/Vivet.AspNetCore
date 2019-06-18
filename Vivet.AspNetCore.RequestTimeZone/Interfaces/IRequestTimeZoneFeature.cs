@@ -8,7 +8,7 @@
         /// <summary>
         /// The <see cref="RequestTimeZone"/> of the request.
         /// </summary>
-        Models.RequestTimeZone RequestTimeZone { get; }
+        RequestTimeZone RequestTimeZone { get; }
 
         /// <summary>
         /// The <see cref="IRequestTimeZoneProvider"/> that determined the request's timezone information.

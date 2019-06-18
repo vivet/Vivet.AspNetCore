@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Vivet.AspNetCore.RequestTimeZone.Models;
 
-namespace Vivet.AspNetCore.RequestTimeZone.Providers
+namespace Vivet.AspNetCore.RequestTimeZone
 {
     /// <summary>
     /// Determines the timezone information for a request via the value of a cookie.
     /// </summary>
-    public class CookieRequestTimeZoneProvider : RequestTimeZoneProvider
+    public class RequestTimeZoneCookieProvider : RequestTimeZoneProvider
     {
         private const string PREFIX = "tz=";
 
@@ -22,7 +21,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Providers
         /// The name of the cookie that contains the user's preferred timezone information.
         /// Defaults to <see cref="DefaultCookieName"/>.
         /// </summary>
-        public string CookieName { get; set; } = CookieRequestTimeZoneProvider.DefaultCookieName;
+        public string CookieName { get; set; } = RequestTimeZoneCookieProvider.DefaultCookieName;
 
         /// <inheritdoc />
         public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
@@ -46,12 +45,12 @@ namespace Vivet.AspNetCore.RequestTimeZone.Providers
         /// </summary>
         /// <param name="requestCulture">The <see cref="RequestTimeZone"/>.</param>
         /// <returns>The cookie value.</returns>
-        public static string MakeCookieValue(Models.RequestTimeZone requestCulture)
+        public static string MakeCookieValue(RequestTimeZone requestCulture)
         {
             if (requestCulture == null)
                 throw new ArgumentNullException(nameof(requestCulture));
 
-            return $"{CookieRequestTimeZoneProvider.PREFIX}{requestCulture.TimeZone.Id}";
+            return $"{RequestTimeZoneCookieProvider.PREFIX}{requestCulture.TimeZone.Id}";
         }
     }
 }
