@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions
 {
@@ -13,19 +12,14 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
         /// Inserts <see cref="DateTimeConverter"/> as serialization converter.  
         /// </summary>  
         /// <param name="options">The <see cref="MvcJsonOptions"/>.</param>  
-        /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>  
         /// <returns>The <see cref="MvcJsonOptions"/>.</returns>  
-        public static MvcJsonOptions AddDateTimeConverter(this MvcJsonOptions options, IServiceCollection serviceCollection)
+        public static MvcJsonOptions AddDateTimeConverter(this MvcJsonOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            //var requestTimeZone = serviceCollection
-            //    .BuildServiceProvider()
-            //    .GetService<RequestTimeZone>(); 
-
             options.SerializerSettings.Converters
-                .Add(new DateTimeConverter(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
+                .Add(new DateTimeConverter(new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
 
             return options;
         }

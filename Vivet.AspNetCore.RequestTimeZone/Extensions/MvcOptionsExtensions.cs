@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions
 {
@@ -13,19 +12,14 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
         /// Inserts the <see cref="DateTimeModelBinderProvider"/> as model binder provider.  
         /// </summary>  
         /// <param name="options">The <see cref="MvcOptions"/>.</param>  
-        /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>  
         /// <returns>The <see cref="MvcOptions"/>.</returns>  
-        public static MvcOptions AddDateTimeModelBinderProvider(this MvcOptions options, IServiceCollection serviceCollection)
+        public static MvcOptions AddDateTimeModelBinderProvider(this MvcOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            //var requestTimeZone = serviceCollection
-            //    .BuildServiceProvider()
-            //    .GetService<RequestTimeZone>(); 
-
             options.ModelBinderProviders
-                .Insert(0, new DateTimeModelBinderProvider(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
+                .Insert(0, new DateTimeModelBinderProvider(new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
             
             return options;
         }

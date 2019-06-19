@@ -32,7 +32,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                 services
                     .AddMvc(x =>
                     {
-                        x.AddDateTimeModelBinderProvider(services); 
+                        x.AddDateTimeModelBinderProvider(); 
                     });
             }
 
@@ -42,7 +42,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                     .AddMvc()
                     .AddJsonOptions(x =>
                     {
-                        x.AddDateTimeConverter(services);
+                        x.AddDateTimeConverter();
                     });
             }
             

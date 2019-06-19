@@ -56,7 +56,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             httpContext.Features
                 .Set<IRequestTimeZoneFeature>(new RequestTimeZoneFeature(requestTimeZone, winningProvider));
 
-            httpContext.Response.Headers["TZ"] = requestTimeZone.TimeZone.Id;
+            httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
 
             DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => TimeZoneInfo.FindSystemTimeZoneById(requestTimeZone.TimeZone.Id));
 

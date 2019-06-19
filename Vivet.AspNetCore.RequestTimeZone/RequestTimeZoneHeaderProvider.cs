@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 namespace Vivet.AspNetCore.RequestTimeZone
 {
     /// <summary>
-    /// Determines the timezone information for a request via the value of the 'TZ' header.
+    /// Determines the timezone information for a request via the value of the 'tz' header.
     /// </summary>
     public class RequestTimeZoneHeaderProvider : RequestTimeZoneProvider
     {

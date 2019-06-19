@@ -43,14 +43,14 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// <summary>
         /// Creates a string representation of a <see cref="RequestTimeZone"/> for placement in a cookie.
         /// </summary>
-        /// <param name="requestCulture">The <see cref="RequestTimeZone"/>.</param>
+        /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>
         /// <returns>The cookie value.</returns>
-        public static string MakeCookieValue(RequestTimeZone requestCulture)
+        public static string MakeCookieValue(RequestTimeZone requestTimeZone)
         {
-            if (requestCulture == null)
-                throw new ArgumentNullException(nameof(requestCulture));
+            if (requestTimeZone == null)
+                throw new ArgumentNullException(nameof(requestTimeZone));
 
-            return $"{RequestTimeZoneCookieProvider.PREFIX}{requestCulture.TimeZone.Id}";
+            return $"{RequestTimeZoneCookieProvider.PREFIX}{requestTimeZone.TimeZone.Id}";
         }
     }
 }

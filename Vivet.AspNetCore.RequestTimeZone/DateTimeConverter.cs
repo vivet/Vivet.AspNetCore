@@ -10,13 +10,13 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// <summary>  
         /// Request Time Zone.
         /// </summary>  
-        protected virtual Func<RequestTimeZone> RequestTimeZone { get; }
+        protected virtual RequestTimeZone RequestTimeZone { get; }
 
         /// <summary>  
         /// Constructor.
         /// </summary>  
         /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>  
-        public DateTimeConverter(Func<RequestTimeZone> requestTimeZone)
+        public DateTimeConverter(RequestTimeZone requestTimeZone)
         {
             this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
         }
@@ -24,7 +24,11 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// <inheritdoc />
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(DateTime) || objectType == typeof(DateTime?);
+            return
+                //objectType == typeof(DateTime) ||
+                //objectType == typeof(DateTime?) ||
+                objectType == typeof(DateTimeOffset) ||
+                objectType == typeof(DateTimeOffset?);
         }
         
         /// <inheritdoc />
@@ -41,13 +45,14 @@ namespace Vivet.AspNetCore.RequestTimeZone
         {
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
-            
-            var userTimeZone = this.RequestTimeZone();
+
+            var dateTime = Convert.ToDateTime(value);
+            var convertedDateTime = TimeZoneInfo.ConvertTime(dateTime, this.RequestTimeZone.TimeZone);
+            var dateTimeOffset = new DateTimeOffset(convertedDateTime, this.RequestTimeZone.TimeZone.BaseUtcOffset);
 
             writer
-                .WriteValue(TimeZoneInfo.ConvertTime(Convert.ToDateTime(value), userTimeZone.TimeZone)
-                    .ToString(serializer.DateFormatString));
-            
+                .WriteValue(dateTimeOffset.ToString(serializer.DateFormatString));
+
             writer
                 .Flush();
         }
