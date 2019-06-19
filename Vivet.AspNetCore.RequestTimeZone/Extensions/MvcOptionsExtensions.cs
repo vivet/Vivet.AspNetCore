@@ -20,12 +20,12 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            var requestTimeZone = serviceCollection
-                .BuildServiceProvider()
-                .GetService<RequestTimeZone>(); 
+            //var requestTimeZone = serviceCollection
+            //    .BuildServiceProvider()
+            //    .GetService<RequestTimeZone>(); 
 
             options.ModelBinderProviders
-                .Insert(0, new DateTimeModelBinderProvider(() => requestTimeZone));
+                .Insert(0, new DateTimeModelBinderProvider(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
             
             return options;
         }
