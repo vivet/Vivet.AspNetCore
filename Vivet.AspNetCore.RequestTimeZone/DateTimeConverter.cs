@@ -43,14 +43,15 @@ namespace Vivet.AspNetCore.RequestTimeZone
         {
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
+
+            var timeZone = this.RequestTimeZone.TimeZone;
+            var dateTime = Convert.ToDateTime(DateTimeOffset.Parse(value.ToString()));
+            var convertTime = TimeZoneInfo.ConvertTime(dateTime, timeZone);
+            var dateTimeOffset = new DateTimeOffset(convertTime, timeZone.BaseUtcOffset);
+
+            writer.WriteValue(dateTimeOffset
+                .ToString(serializer.DateFormatString));  
             
-            var offset = this.RequestTimeZone.TimeZone.BaseUtcOffset;
-            var dateTimeOffset = DateTimeOffset.Parse(value.ToString());
-            var convertedDateTime = new DateTimeOffset(dateTimeOffset.DateTime.Add(offset), offset);
-
-            writer
-                .WriteValue(convertedDateTime.ToString(serializer.DateFormatString));
-
             writer
                 .Flush();
         }
