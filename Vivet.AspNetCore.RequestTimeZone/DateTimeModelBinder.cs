@@ -34,7 +34,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (string.IsNullOrEmpty(value.FirstValue))
                 return null;
 
-            var success = DateTime.TryParse(value.FirstValue, null, DateTimeStyles.AdjustToUniversal, out var datetime);
+            var success = DateTimeOffset.TryParse(value.FirstValue, null, DateTimeStyles.AdjustToUniversal, out var datetime);
 
             if (success)
             {
@@ -44,7 +44,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             else
             {
                 var accessor = bindingContext.ModelMetadata.ModelBindingMessageProvider
-                    .AttemptedValueIsInvalidAccessor(value.ToString(), nameof(DateTime));
+                    .AttemptedValueIsInvalidAccessor(value.ToString(), nameof(DateTimeOffset));
                 
                 bindingContext.ModelState
                     .TryAddModelError(bindingContext.ModelName, accessor);

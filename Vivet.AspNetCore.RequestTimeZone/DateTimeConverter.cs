@@ -25,8 +25,6 @@ namespace Vivet.AspNetCore.RequestTimeZone
         public override bool CanConvert(Type objectType)
         {
             return
-                //objectType == typeof(DateTime) ||
-                //objectType == typeof(DateTime?) ||
                 objectType == typeof(DateTimeOffset) ||
                 objectType == typeof(DateTimeOffset?);
         }
@@ -46,12 +44,11 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
 
-            var dateTime = Convert.ToDateTime(value);
+            var dateTime = DateTimeOffset.Parse(value.ToString());
             var convertedDateTime = TimeZoneInfo.ConvertTime(dateTime, this.RequestTimeZone.TimeZone);
-            var dateTimeOffset = new DateTimeOffset(convertedDateTime, this.RequestTimeZone.TimeZone.BaseUtcOffset);
 
             writer
-                .WriteValue(dateTimeOffset.ToString(serializer.DateFormatString));
+                .WriteValue(convertedDateTime.ToString(serializer.DateFormatString));
 
             writer
                 .Flush();

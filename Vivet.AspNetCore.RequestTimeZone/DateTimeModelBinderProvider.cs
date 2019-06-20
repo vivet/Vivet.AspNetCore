@@ -26,7 +26,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            if (context.Metadata.UnderlyingOrModelType == typeof(DateTime))
+            if (context.Metadata.UnderlyingOrModelType == typeof(DateTimeOffset))
             {
                 return new DateTimeModelBinder(this.RequestTimeZone);
             }
