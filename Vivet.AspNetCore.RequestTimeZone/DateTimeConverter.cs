@@ -10,13 +10,13 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// <summary>  
         /// Request Time Zone.
         /// </summary>  
-        protected virtual RequestTimeZone RequestTimeZone { get; }
+        protected virtual Func<RequestTimeZone> RequestTimeZone { get; }
 
         /// <summary>  
         /// Constructor.
         /// </summary>  
         /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>  
-        public DateTimeConverter(RequestTimeZone requestTimeZone)
+        public DateTimeConverter(Func<RequestTimeZone> requestTimeZone)
         {
             this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
         }
@@ -44,13 +44,13 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
 
-            var timeZone = this.RequestTimeZone.TimeZone;
+            var timeZone = this.RequestTimeZone().TimeZone;
             var parsedDateTime = DateTimeOffset.Parse(value.ToString());
             var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime.DateTime, timeZone);
             var dateTimeOffset = new DateTimeOffset(convertTime, timeZone.BaseUtcOffset);
 
             writer.WriteValue(dateTimeOffset
-                .ToString(serializer.DateFormatString));  
+                .ToString(serializer.DateFormatString));
             
             writer
                 .Flush();

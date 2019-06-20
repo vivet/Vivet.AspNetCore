@@ -19,7 +19,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                 throw new ArgumentNullException(nameof(options));
 
             options.ModelBinderProviders
-                .Insert(0, new DateTimeModelBinderProvider(new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
+                .Insert(0, new DateTimeModelBinderProvider(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
             
             return options;
         }

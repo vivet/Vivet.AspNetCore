@@ -11,13 +11,13 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// <summary>  
         /// Request Time Zone.
         /// </summary>  
-        protected virtual RequestTimeZone RequestTimeZone { get; }
+        protected virtual Func<RequestTimeZone> RequestTimeZone { get; }
 
         /// <summary>  
         /// Constructor.
         /// </summary>  
         /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>  
-        public DateTimeModelBinder(RequestTimeZone requestTimeZone)
+        public DateTimeModelBinder(Func<RequestTimeZone> requestTimeZone)
         {
             this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
         }
@@ -38,7 +38,8 @@ namespace Vivet.AspNetCore.RequestTimeZone
 
             if (success)
             {
-                var dateTimeUtc = TimeZoneInfo.ConvertTime(datetime, this.RequestTimeZone.TimeZone).ToUniversalTime();
+                var timeZone = this.RequestTimeZone().TimeZone;
+                var dateTimeUtc = TimeZoneInfo.ConvertTime(datetime, timeZone).ToUniversalTime();
                 bindingContext.Result = ModelBindingResult.Success(dateTimeUtc);
             }
             else

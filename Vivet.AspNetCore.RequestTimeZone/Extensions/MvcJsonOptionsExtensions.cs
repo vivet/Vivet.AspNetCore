@@ -19,7 +19,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                 throw new ArgumentNullException(nameof(options));
 
             options.SerializerSettings.Converters
-                .Add(new DateTimeConverter(new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
+                .Add(new DateTimeConverter(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
 
             return options;
         }
