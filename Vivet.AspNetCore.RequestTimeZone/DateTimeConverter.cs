@@ -53,8 +53,8 @@ namespace Vivet.AspNetCore.RequestTimeZone
             var timeZone = this.RequestTimeZone().TimeZone;
             var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone);
 
-            writer.WriteValue(convertTime
-                .ToString(serializer.DateFormatString)); 
+            writer
+                .WriteValue(convertTime); 
             
             writer
                 .Flush();
