@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -44,8 +45,12 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
 
+
+            DateTimeOffset.TryParse(value.ToString(), null, DateTimeStyles.AdjustToUniversal, out var parsedDateTime);
+
+            
             var timeZone = this.RequestTimeZone().TimeZone;
-            var parsedDateTime = DateTimeOffset.Parse(value.ToString());
+            //var parsedDateTime = DateTimeOffset.Parse(value.ToString());
             var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone);
             //var dateTimeOffset = new DateTimeOffset(convertTime, timeZone.BaseUtcOffset);
 
