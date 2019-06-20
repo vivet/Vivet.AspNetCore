@@ -40,6 +40,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             {
                 var timeZone = this.RequestTimeZone().TimeZone;
                 var dateTimeUtc = TimeZoneInfo.ConvertTime(datetime, timeZone).ToUniversalTime();
+
                 bindingContext.Result = ModelBindingResult.Success(dateTimeUtc);
             }
             else

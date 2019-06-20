@@ -46,10 +46,10 @@ namespace Vivet.AspNetCore.RequestTimeZone
 
             var timeZone = this.RequestTimeZone().TimeZone;
             var parsedDateTime = DateTimeOffset.Parse(value.ToString());
-            var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime.DateTime, timeZone);
-            var dateTimeOffset = new DateTimeOffset(convertTime, timeZone.BaseUtcOffset);
+            var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone);
+            //var dateTimeOffset = new DateTimeOffset(convertTime, timeZone.BaseUtcOffset);
 
-            writer.WriteValue(dateTimeOffset
+            writer.WriteValue(convertTime
                 .ToString(serializer.DateFormatString));
             
             writer
