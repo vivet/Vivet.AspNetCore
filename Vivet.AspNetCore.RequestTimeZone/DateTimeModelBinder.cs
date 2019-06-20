@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -34,12 +33,12 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (string.IsNullOrEmpty(value.FirstValue))
                 return null;
 
-            var success = DateTimeOffset.TryParse(value.FirstValue, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out var datetime);
+            var success = DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 
             if (success)
             {
                 var timeZone = this.RequestTimeZone().TimeZone;
-                var dateTimeUtc = TimeZoneInfo.ConvertTime(datetime, timeZone).ToUniversalTime();
+                var dateTimeUtc = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone).ToUniversalTime();
 
                 bindingContext.Result = ModelBindingResult.Success(dateTimeUtc);
             }

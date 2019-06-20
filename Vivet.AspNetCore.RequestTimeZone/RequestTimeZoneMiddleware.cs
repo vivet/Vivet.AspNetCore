@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone
@@ -9,14 +10,17 @@ namespace Vivet.AspNetCore.RequestTimeZone
     /// <inheritdoc />
     public class RequestTimeZoneMiddleware : IMiddleware
     {
+        private readonly ILogger logger;
         private readonly RequestTimeZoneOptions options;
 
         /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="logger">The <see cref="ILogger"/>.</param>
         /// <param name="options">The <see cref="RequestTimeZoneOptions"/>.</param>
-        public RequestTimeZoneMiddleware(RequestTimeZoneOptions options)
+        public RequestTimeZoneMiddleware(ILogger logger, RequestTimeZoneOptions options)
         {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
@@ -42,13 +46,24 @@ namespace Vivet.AspNetCore.RequestTimeZone
                     if (providerTimeZoneResult == null)
                         continue;
 
-                    var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
-
-                    if (result.TimeZone != null)
+                    try
                     {
-                        requestTimeZone = result;
-                        winningProvider = provider;
-                        break;
+                        var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
+
+                        if (result.TimeZone != null)
+                        {
+                            requestTimeZone = result;
+                            winningProvider = provider;
+                            break;
+                        }
+                    }
+                    catch (InvalidTimeZoneException ex)
+                    {
+                        this.logger.LogWarning(ex, $"Invalid TimeZone Id: {providerTimeZoneResult.TimeZoneName}");
+                    }
+                    catch (TimeZoneNotFoundException ex)
+                    {
+                        this.logger.LogWarning(ex, $"TimeZone Not Found: {providerTimeZoneResult.TimeZoneName}");
                     }
                 }
             }
@@ -58,7 +73,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
 
             httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
 
-            DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => TimeZoneInfo.FindSystemTimeZoneById(requestTimeZone.TimeZone.Id));
+            DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => requestTimeZone.TimeZone);
 
             await next(httpContext);
         }

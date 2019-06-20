@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -37,7 +35,11 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (reader == null) 
                 throw new ArgumentNullException(nameof(reader));
 
-            return DateTimeOffset.Parse(reader.Value.ToString());
+            var value = reader.Value;
+
+            DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
+
+            return parsedDateTime;
         }
 
         /// <inheritdoc />
@@ -46,7 +48,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
 
-            DateTimeOffset.TryParse(value.ToString(), DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out var parsedDateTime);
+            DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 
             var timeZone = this.RequestTimeZone().TimeZone;
             var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone);
