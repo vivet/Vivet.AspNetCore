@@ -12,7 +12,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// Time Zone.
         /// Thread static variable to store timezone for each <see cref="Thread"/>.
         /// </summary>
-        public static AsyncLocal<TimeZoneInfo> TimeZone { get; set; } = new AsyncLocal<TimeZoneInfo>(args => TimeZoneInfo.FindSystemTimeZoneById("UTC"));
+        public static ThreadLocal<TimeZoneInfo> TimeZone { get; set; } = new ThreadLocal<TimeZoneInfo>(() => TimeZoneInfo.FindSystemTimeZoneById("UTC"));
 
         /// <summary>
         /// Returns the local date time, based on the <see cref="TimeZone"/>.
