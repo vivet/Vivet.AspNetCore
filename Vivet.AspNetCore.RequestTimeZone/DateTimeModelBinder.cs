@@ -34,7 +34,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (string.IsNullOrEmpty(value.FirstValue))
                 return null;
 
-            var success = DateTimeOffset.TryParse(value.FirstValue, null, DateTimeStyles.AdjustToUniversal, out var datetime);
+            var success = DateTimeOffset.TryParse(value.FirstValue, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out var datetime);
 
             if (success)
             {

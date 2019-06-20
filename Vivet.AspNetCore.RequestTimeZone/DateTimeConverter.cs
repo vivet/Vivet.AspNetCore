@@ -46,13 +46,13 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (writer == null) 
                 throw new ArgumentNullException(nameof(writer));
 
-            DateTimeOffset.TryParse(value.ToString(), null, DateTimeStyles.AdjustToUniversal, out var parsedDateTime);
+            DateTimeOffset.TryParse(value.ToString(), DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out var parsedDateTime);
 
             var timeZone = this.RequestTimeZone().TimeZone;
             var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone);
 
             writer.WriteValue(convertTime
-                .ToString()); // serializer.DateFormatString
+                .ToString(serializer.DateFormatString)); 
             
             writer
                 .Flush();
