@@ -37,6 +37,9 @@ namespace Vivet.AspNetCore.RequestTimeZone
 
             var value = reader.Value;
 
+            if (value == null)
+                return null;
+
             DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 
             return parsedDateTime;
