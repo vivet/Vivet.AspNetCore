@@ -45,8 +45,8 @@ namespace Vivet.AspNetCore.RequestTimeZone
                 throw new ArgumentNullException(nameof(writer));
 
             var timeZone = this.RequestTimeZone.TimeZone;
-            var dateTime = Convert.ToDateTime(DateTime.Parse(value.ToString()));
-            var convertTime = TimeZoneInfo.ConvertTime(dateTime, timeZone);
+            var parsedDateTime = DateTimeOffset.Parse(value.ToString());
+            var convertTime = TimeZoneInfo.ConvertTime(parsedDateTime.DateTime, timeZone);
             var dateTimeOffset = new DateTimeOffset(convertTime, timeZone.BaseUtcOffset);
 
             writer.WriteValue(dateTimeOffset
