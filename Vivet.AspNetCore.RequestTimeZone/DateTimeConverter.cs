@@ -34,8 +34,8 @@ namespace Vivet.AspNetCore.RequestTimeZone
         {
             if (reader == null) 
                 throw new ArgumentNullException(nameof(reader));
-            
-            throw new NotImplementedException();
+
+            return DateTimeOffset.Parse(reader.Value.ToString());
         }
 
         /// <inheritdoc />
