@@ -13,9 +13,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.1.8.0</Version>
-    <FileVersion>1.1.8.0</FileVersion>
-    <AssemblyVersion>1.1.8.0</AssemblyVersion>
+    <Version>1.1.9.0</Version>
+    <FileVersion>1.1.9.0</FileVersion>
+    <AssemblyVersion>1.1.9.0</AssemblyVersion>
     <PackageTags>asp netcore http request timezone middleware</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

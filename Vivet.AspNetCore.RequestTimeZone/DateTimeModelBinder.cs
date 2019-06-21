@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -27,28 +28,32 @@ namespace Vivet.AspNetCore.RequestTimeZone
             if (bindingContext == null)
                 throw new ArgumentNullException(nameof(bindingContext));
 
-            var value = bindingContext.ValueProvider
-                .GetValue(bindingContext.ModelName);
-            
-            if (string.IsNullOrEmpty(value.FirstValue))
-                return null;
+            var valueProviderResult = bindingContext.ValueProvider  
+                .GetValue(bindingContext.ModelName);  
 
-            var success = DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
-
-            if (success)
+            if (string.IsNullOrEmpty(valueProviderResult.FirstValue))
             {
-                var timeZone = this.RequestTimeZone().TimeZone;
-                var dateTimeUtc = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone).ToUniversalTime();
-
-                bindingContext.Result = ModelBindingResult.Success(dateTimeUtc);
+                bindingContext.Result = ModelBindingResult.Success(null);
             }
             else
             {
-                var accessor = bindingContext.ModelMetadata.ModelBindingMessageProvider
-                    .AttemptedValueIsInvalidAccessor(value.ToString(), nameof(DateTimeOffset));
-                
-                bindingContext.ModelState
-                    .TryAddModelError(bindingContext.ModelName, accessor);
+                var success = DateTimeOffset.TryParse(valueProviderResult.FirstValue, null, DateTimeStyles.AdjustToUniversal, out var parsedDateTime);
+
+                if (success)  
+                {  
+                    var timeZone = this.RequestTimeZone().TimeZone;
+                    var dateTimeUtc = TimeZoneInfo.ConvertTime(parsedDateTime, timeZone).ToUniversalTime();
+
+                    bindingContext.Result = ModelBindingResult.Success(dateTimeUtc);
+                }  
+                else
+                {
+                    var invalidAccessor = bindingContext.ModelMetadata
+                        .ModelBindingMessageProvider.AttemptedValueIsInvalidAccessor(valueProviderResult.ToString(), nameof(DateTimeOffset));
+
+                    bindingContext.ModelState
+                        .TryAddModelError(bindingContext.ModelName, invalidAccessor);  
+                }  
             }
 
             return Task.CompletedTask;
