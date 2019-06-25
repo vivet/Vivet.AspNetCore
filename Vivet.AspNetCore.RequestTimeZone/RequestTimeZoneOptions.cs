@@ -62,8 +62,8 @@ namespace Vivet.AspNetCore.RequestTimeZone
             this.RequestTimeZoneProviders = new List<IRequestTimeZoneProvider>
             {
                 new RequestTimeZoneQueryStringProvider { Options = this },
-                new RequestTimeZoneHeaderProvider { Options = this },
-                new RequestTimeZoneCookieProvider { Options = this }
+                new RequestTimeZoneCookieProvider { Options = this },
+                new RequestTimeZoneHeaderProvider { Options = this }
             };
         }
     }
