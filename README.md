@@ -13,46 +13,59 @@ A collection of AspNetCore components.
 
 Middleware to configure request timezone options.  
 
-The current timezone on a request is set in the Request TimeZone Middleware. The middleware is enabled in the Startup.Configure method, and on every request the list of RequestTimeZoneProvider in the RequestTimeZoneOptions is enumerated and the first provider that can successfully determine the request timezone is used. The default providers come from the RequestTimeZoneOptions class:  
+The current timezone on a request is set in the Request TimeZone Middleware. The middleware is enabled in the Startup.Configure method, and on every request the list of providers configured in the ```RequestTimeZoneOptions``` is enumerated, and the first provider in order, that can successfully determine the request timezone is applied. The default providers are:  
 
 * QueryStringRequestTimeZoneProvider (```?tz=myTimezone```)
 * HeaderRequestTimeZoneProvider (```TZ=myTimezone```)
 * CookieRequestTimeZoneProvider
 
-The default list goes from most specific to least specific. You can change the order and even add a custom timezone provider, similar to ```Microsoft.AspNetCore.Localization```. If none of the providers can determine the request timezone, the ```DefaultRequestTimeZone``` is used.  
+The default list goes from most specific to least specific. You can change the order and even add a custom timezone provider, similar to the implementation of ```Microsoft.AspNetCore.Localization```. If none of the providers can determine the request timezone, the ```DefaultRequestTimeZone``` is used.  
 
 #### Configuration
 To configure the Request TimeZone Middleware, first add the required services to the ```IServiceCollection```, as shown below.  
 ```csharp
 services
-	.AddRequestTimeZone("myDefaultTimeZone");
+    .AddRequestTimeZone("myDefaultTimeZone");
 ```
 Or,
 ```csharp
 services
-	.AddRequestTimeZone(x => 
-	{
-		// Configuration.
-	});
+    .AddRequestTimeZone(x => 
+    {
+        // Configuration.
+    });
 ```
 
 Next, register the middleware in the pipeline, as shown below.   
 ```csharp
 applicationBuilder
-	.UseRequestTimeZone();
+    .UseRequestTimeZone();
 ```
 
 The middleware is now configured in the pipeline, and will register request timezone when suplied by one of the configured providers.
 
-#### asdadasas
+#### Accessing
 When a timezone is provided as part of a request, it can be retrieved through the ```IRequestTimeZoneFeature``` from a controller, as follows:
 ```csharp
 this.HttpContext.Features
-	.Get<IRequestTimeZoneFeature>()
+	.Get<tRequestTimeZoneFeature>()
     .RequestTimeZone
     .TimeZone;
 ```
-Alternatively, the ```httpContext.GetUserTimeZone``` extension method, to get the timezone, similar to the above.
+
+Alternatively, the feature may be accessed through the extension method ```GetUserTimeZone()``` of ```HttpContext```, as shown below:
+```csharp
+httpContext
+    .GetUserTimeZone();
+```
+
+Finally, the library also contains a ```ThreadStatic``` accessor, called ``DateTimeInfo````.  
+The implementation exposes the ```RequestTimezone```, as well an utc and local datetime that is based on the timezone. 
+
+```csharp
+var utc = DateTimeInfo.Utc  // Gets utc datetime
+var local = DateTimeInfo.Local  // Gets local datetime
+var timezone = DateTimeInfo.TimeZone  // Gets the request timezone.
+```
 
 ***
-
