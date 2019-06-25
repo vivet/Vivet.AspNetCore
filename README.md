@@ -60,7 +60,7 @@ httpContext
     .GetUserTimeZone();
 ```
 
-Finally, the library also contains a ```ThreadStatic``` accessor, called ``DateTimeInfo````.  
+Finally, the library also contains a ```ThreadStatic``` accessor, called ```DateTimeInfo```.  
 The implementation exposes the ```RequestTimezone```, as well an utc and local datetime that is based on the timezone. 
 
 ```csharp
