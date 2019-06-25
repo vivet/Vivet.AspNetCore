@@ -48,16 +48,14 @@ When a request model contains properties of type ```DateTimeOffset```, those wil
 #### Accessors
 When a timezone is provided as part of a request, it can be retrieved through the ```IRequestTimeZoneFeature``` from a controller, as follows:
 ```csharp
-this.HttpContext.Features
-	.Get<tRequestTimeZoneFeature>()
-    .RequestTimeZone
-    .TimeZone;
+var requestTimeZone = this.HttpContext.Features
+    .Get<tRequestTimeZoneFeature>()
+    .RequestTimeZone;
 ```
 
 Alternatively, the feature may be accessed through the extension method ```GetUserTimeZone()``` of ```HttpContext```, as shown below:
 ```csharp
-httpContext
-    .GetUserTimeZone();
+var requestTimeZone = httpContext.GetUserTimeZone();
 ```
 
 Finally, the library also contains a ```ThreadStatic``` accessor, called ```DateTimeInfo```.  
