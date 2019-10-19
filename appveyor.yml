@@ -1,4 +1,4 @@
-version: 1.1.10.0{build}
+version: 1.1.10.{build}
 skip_tags: true
 max_jobs: 1
 image: Visual Studio 2017
@@ -11,7 +11,7 @@ nuget:
 environment:
   NUGET_HOST: https://www.nuget.org
   NUGET_APIKEY: 
-    secure: oeSwT33L7QcWnDXH3H/pWIUJDdM+el24LvqEQ6HqzpR0Ok/7Z3VZj51u14veU1Ho
+    secure: wXtN/rYFfPZpBA6hfdqHhqUDkpe6i4HHe2T7n3vkUHPCkGgjrgSFPCzXIqLwjB5g
 build: off
 build_script:
 - ps: >-
