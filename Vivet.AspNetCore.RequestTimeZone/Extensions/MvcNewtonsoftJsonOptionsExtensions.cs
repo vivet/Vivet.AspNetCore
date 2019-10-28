@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions
 {
     /// <summary>  
-    /// Mvc Json Options Extensions.
+    /// Mvc Newtonsoft Json Options Extensions.
     /// </summary>  
-    public static class MvcJsonOptionsExtensions
+    public static class MvcNewtonsoftJsonOptionsExtensions
     {
         /// <summary>  
         /// Inserts <see cref="DateTimeConverter"/> as serialization converter.  
         /// </summary>  
-        /// <param name="options">The <see cref="MvcJsonOptions"/>.</param>  
-        /// <returns>The <see cref="MvcJsonOptions"/>.</returns>  
-        public static MvcJsonOptions AddDateTimeConverter(this MvcJsonOptions options)
+        /// <param name="options">The <see cref="MvcNewtonsoftJsonOptions"/>.</param>  
+        /// <returns>The <see cref="MvcNewtonsoftJsonOptions"/>.</returns>  
+        public static MvcNewtonsoftJsonOptions AddDateTimeConverter(this MvcNewtonsoftJsonOptions options)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));

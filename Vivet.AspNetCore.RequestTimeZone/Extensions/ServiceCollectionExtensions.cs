@@ -40,7 +40,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
             {
                 services
                     .AddMvc()
-                    .AddJsonOptions(x =>
+                    .AddNewtonsoftJson(x =>
                     {
                         x.AddDateTimeConverter();
                     });
