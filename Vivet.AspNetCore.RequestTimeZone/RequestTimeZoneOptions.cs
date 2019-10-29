@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Vivet.AspNetCore.RequestTimeZone.Enums;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Providers;
 
 namespace Vivet.AspNetCore.RequestTimeZone
 {
@@ -41,6 +43,12 @@ namespace Vivet.AspNetCore.RequestTimeZone
         /// Enables conversion of date time values in response to local.
         /// </summary>
         public virtual bool EnableResponseToLocal { get; set; }
+
+        /// <summary>
+        /// Json Serializer Type.
+        /// The serializer used with the application.
+        /// </summary>
+        public virtual JsonSerializerType JsonSerializerType { get; set; } = JsonSerializerType.Newtonsoft;
 
         /// <summary>
         /// An ordered list of providers used to determine a request's timezone information.

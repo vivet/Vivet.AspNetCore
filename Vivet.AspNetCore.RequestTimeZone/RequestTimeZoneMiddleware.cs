@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Providers;
 
 namespace Vivet.AspNetCore.RequestTimeZone
 {

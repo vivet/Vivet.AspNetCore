@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Vivet.AspNetCore.RequestTimeZone.Enums;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions
 {
@@ -36,14 +37,31 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                     });
             }
 
-            if (options.EnableRequestToUtc)
+            if (options.EnableResponseToLocal)
             {
-                services
-                    .AddMvc()
-                    .AddNewtonsoftJson(x =>
-                    {
-                        x.AddDateTimeConverter();
-                    });
+                switch (options.JsonSerializerType)
+                {
+                    case JsonSerializerType.Microsoft:
+                        services
+                            .AddMvc()
+                            .AddJsonOptions(x =>
+                            {
+                                x.AddDateTimeConverter();
+                            });
+                        break;
+                    
+                    case JsonSerializerType.Newtonsoft:
+                        services
+                            .AddMvc()
+                            .AddNewtonsoftJson(x =>
+                            {
+                                x.AddDateTimeConverter();
+                            });
+                        break;
+
+                    default:
+                        throw new InvalidOperationException();
+                }
             }
             
             return services;

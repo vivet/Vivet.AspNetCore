@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Vivet.AspNetCore.RequestTimeZone
+namespace Vivet.AspNetCore.RequestTimeZone.Providers
 {
     /// <summary>
-    /// Determines the timezone information for a request via the 'tz' query string parameter.
+    /// Determines the timezone information for a request via the value of the 'tz' header.
     /// </summary>
-    public class RequestTimeZoneQueryStringProvider : RequestTimeZoneProvider
+    public class RequestTimeZoneHeaderProvider : RequestTimeZoneProvider
     {
         /// <summary>
-        /// The key that contains the timezone name.
+        /// The header key that contains the timezone name.
         /// </summary>
-        public virtual string QueryStringKey { get; set; } = "tz";
+        public static string Headerkey { get; set; } = "tz";
 
         /// <inheritdoc />
         public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
@@ -21,7 +21,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
                 throw new ArgumentNullException(nameof(httpContext));
 
             var value = httpContext.Request
-                .Query[this.QueryStringKey];
+                .Headers[RequestTimeZoneHeaderProvider.Headerkey];
 
             if (string.IsNullOrEmpty(value))
                 return RequestTimeZoneProvider.nullProviderTimeZoneResult;
