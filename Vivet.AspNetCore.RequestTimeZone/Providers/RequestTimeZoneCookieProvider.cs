@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Vivet.AspNetCore.RequestTimeZone
+namespace Vivet.AspNetCore.RequestTimeZone.Providers
 {
     /// <summary>
     /// Determines the timezone information for a request via the value of a cookie.

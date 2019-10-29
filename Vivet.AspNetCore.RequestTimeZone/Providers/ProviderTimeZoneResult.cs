@@ -1,7 +1,7 @@
 ﻿using System;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
 
-namespace Vivet.AspNetCore.RequestTimeZone
+namespace Vivet.AspNetCore.RequestTimeZone.Providers
 {
     /// <summary>
     /// Details about the timezone obtained from <see cref="IRequestTimeZoneProvider"/>.

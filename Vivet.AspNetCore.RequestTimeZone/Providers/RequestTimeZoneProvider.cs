@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
 
-namespace Vivet.AspNetCore.RequestTimeZone
+namespace Vivet.AspNetCore.RequestTimeZone.Providers
 {
     /// <summary>
     /// An abstract base class provider for determining the timezone information
