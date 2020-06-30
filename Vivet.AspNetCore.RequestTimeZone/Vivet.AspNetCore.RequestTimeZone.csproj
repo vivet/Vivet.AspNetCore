@@ -4,7 +4,6 @@
     <LangVersion>latest</LangVersion>
     <RepositoryType>Github</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
     <License>LICENSE</License>
     <Product>AspNetCore RequestTimeZone</Product>
     <Authors>Michael Vivet</Authors>
@@ -14,11 +13,20 @@ Similar implementation as Microsoft.AspNetCore.Localization.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>3.1.0.0</Version>
-    <FileVersion>3.1.0.0</FileVersion>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <Version>3.1.1.0</Version>
+    <FileVersion>3.1.1.0</FileVersion>
+    <AssemblyVersion>3.1.1.0</AssemblyVersion>
     <PackageTags>asp netcore http request timezone middleware</PackageTags>
+    <PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningsAsErrors />
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
