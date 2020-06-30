@@ -1,4 +1,4 @@
-version: 3.1.0.{build}
+version: 3.1.1.{build}
 skip_tags: true
 max_jobs: 1
 image: Visual Studio 2019
@@ -20,6 +20,8 @@ test: off
 artifacts:
 - path: '**\*.nupkg'
   name: NuGet Package
+- path: '**\*.snupkg'
+  name: NuGet Symbol Package
 deploy:
 - provider: NuGet
   server: $(NUGET_HOST)
