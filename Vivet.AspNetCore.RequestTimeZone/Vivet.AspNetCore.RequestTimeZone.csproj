@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <RepositoryType>Github</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
@@ -13,36 +13,29 @@ Similar implementation as Microsoft.AspNetCore.Localization.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>3.1.1.0</Version>
-    <FileVersion>3.1.1.0</FileVersion>
-    <AssemblyVersion>3.1.1.0</AssemblyVersion>
+    <Version>5.0.0.0</Version>
+    <FileVersion>5.0.0.0</FileVersion>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
     <PackageTags>asp netcore http request timezone middleware</PackageTags>
     <PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	  <WarningsAsErrors />
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <NoWarn />
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <WarningsAsErrors />
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn />
-    <DocumentationFile>bin\Release\netcoreapp3.0\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\net5.0\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningsAsErrors />
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn />
-    <DocumentationFile>bin\Debug\netcoreapp3.0\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\app5.0\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
