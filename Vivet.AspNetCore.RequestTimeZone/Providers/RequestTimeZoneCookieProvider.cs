@@ -15,13 +15,13 @@ namespace Vivet.AspNetCore.RequestTimeZone.Providers
         /// Represent the default cookie name used to track the user's preferred timezone information,
         /// which is ".AspNetCore.TimeZone".
         /// </summary>
-        public static readonly string DefaultCookieName = ".AspNetCore.TimeZone";
+        public static readonly string defaultCookieName = ".AspNetCore.TimeZone";
 
         /// <summary>
         /// The name of the cookie that contains the user's preferred timezone information.
-        /// Defaults to <see cref="DefaultCookieName"/>.
+        /// Defaults to <see cref="defaultCookieName"/>.
         /// </summary>
-        public string CookieName { get; set; } = RequestTimeZoneCookieProvider.DefaultCookieName;
+        public string CookieName { get; set; } = RequestTimeZoneCookieProvider.defaultCookieName;
 
         /// <inheritdoc />
         public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)

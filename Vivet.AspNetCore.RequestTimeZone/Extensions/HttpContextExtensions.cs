@@ -20,7 +20,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
                 throw new ArgumentNullException(nameof(httpContext));
 
             return httpContext.Features
-                .Get<IRequestTimeZoneFeature>()
+                .Get<IRequestTimeZoneFeature>()?
                 .RequestTimeZone
                 .TimeZone;
         }

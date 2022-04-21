@@ -10,21 +10,14 @@ namespace Vivet.AspNetCore.RequestTimeZone
     /// </summary>
     public class RequestTimeZoneOptions
     {
-        private readonly RequestTimeZone defaultRequestTimeZone = new RequestTimeZone("UTC");
+        private readonly RequestTimeZone defaultRequestTimeZone = new("UTC");
 
         /// <summary>
         /// Gets or sets the default timezone to use for requests.
         /// </summary>
-        public virtual RequestTimeZone DefaultRequestTimeZone
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.Id))
-                    return this.defaultRequestTimeZone;
-
-                return new RequestTimeZone(this.Id);
-            }
-        }
+        public virtual RequestTimeZone DefaultRequestTimeZone => string.IsNullOrEmpty(this.Id) 
+            ? this.defaultRequestTimeZone 
+            : new RequestTimeZone(this.Id);
 
         /// <summary>
         /// Id.
@@ -60,7 +53,7 @@ namespace Vivet.AspNetCore.RequestTimeZone
         ///     <item><description><see cref="RequestTimeZoneCookieProvider"/></description></item>
         /// </list>
         /// </summary>
-        public virtual IList<IRequestTimeZoneProvider> RequestTimeZoneProviders { get; set; }
+        public IList<IRequestTimeZoneProvider> RequestTimeZoneProviders { get; set; }
 
         /// <summary>
         /// Constructor.

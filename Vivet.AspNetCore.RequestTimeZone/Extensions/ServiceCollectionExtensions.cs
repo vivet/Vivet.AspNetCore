@@ -24,7 +24,7 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions
             optionsAction.Invoke(options);
 
             services
-                .AddSingleton(x => options)
+                .AddSingleton(_ => options)
                 .AddScoped<RequestTimeZone>()
                 .AddSingleton<RequestTimeZoneMiddleware>();
 
