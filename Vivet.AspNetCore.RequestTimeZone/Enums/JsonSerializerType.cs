@@ -1,18 +1,17 @@
-﻿namespace Vivet.AspNetCore.RequestTimeZone.Enums
+﻿namespace Vivet.AspNetCore.RequestTimeZone.Enums;
+
+/// <summary>
+/// Json Serializer Type.
+/// </summary>
+public enum JsonSerializerType
 {
     /// <summary>
-    /// Json Serializer Type.
+    /// Microsoft.
     /// </summary>
-    public enum JsonSerializerType
-    {
-        /// <summary>
-        /// Microsoft.
-        /// </summary>
-        Microsoft,
+    Microsoft,
 
-        /// <summary>
-        /// Newtonsoft.
-        /// </summary>
-        Newtonsoft
-    }
+    /// <summary>
+    /// Newtonsoft.
+    /// </summary>
+    Newtonsoft
 }

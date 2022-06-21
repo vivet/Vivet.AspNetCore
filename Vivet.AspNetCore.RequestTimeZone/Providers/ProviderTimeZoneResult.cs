@@ -1,25 +1,24 @@
 ﻿using System;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
 
-namespace Vivet.AspNetCore.RequestTimeZone.Providers
+namespace Vivet.AspNetCore.RequestTimeZone.Providers;
+
+/// <summary>
+/// Details about the timezone obtained from <see cref="IRequestTimeZoneProvider"/>.
+/// </summary>
+public class ProviderTimeZoneResult
 {
     /// <summary>
-    /// Details about the timezone obtained from <see cref="IRequestTimeZoneProvider"/>.
+    /// The timezone name.
     /// </summary>
-    public class ProviderTimeZoneResult
+    public virtual string TimeZoneName { get; }
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="name">The name of the timezone.</param>
+    public ProviderTimeZoneResult(string name)
     {
-        /// <summary>
-        /// The timezone name.
-        /// </summary>
-        public virtual string TimeZoneName { get; }
-        
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name">The name of the timezone.</param>
-        public ProviderTimeZoneResult(string name)
-        {
-            this.TimeZoneName = name ?? throw new ArgumentNullException(nameof(name));
-        }
+        this.TimeZoneName = name ?? throw new ArgumentNullException(nameof(name));
     }
 }

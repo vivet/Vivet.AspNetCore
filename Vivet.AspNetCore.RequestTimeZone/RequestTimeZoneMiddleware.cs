@@ -6,77 +6,76 @@ using Microsoft.Extensions.Logging;
 using Vivet.AspNetCore.RequestTimeZone.Interfaces;
 using Vivet.AspNetCore.RequestTimeZone.Providers;
 
-namespace Vivet.AspNetCore.RequestTimeZone
+namespace Vivet.AspNetCore.RequestTimeZone;
+
+/// <inheritdoc />
+public class RequestTimeZoneMiddleware : IMiddleware
 {
-    /// <inheritdoc />
-    public class RequestTimeZoneMiddleware : IMiddleware
+    private readonly ILogger logger;
+    private readonly RequestTimeZoneOptions options;
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    /// <param name="logger">The <see cref="ILogger"/>.</param>
+    /// <param name="options">The <see cref="RequestTimeZoneOptions"/>.</param>
+    public RequestTimeZoneMiddleware(ILogger logger, RequestTimeZoneOptions options)
     {
-        private readonly ILogger logger;
-        private readonly RequestTimeZoneOptions options;
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        this.options = options ?? throw new ArgumentNullException(nameof(options));
+    }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="logger">The <see cref="ILogger"/>.</param>
-        /// <param name="options">The <see cref="RequestTimeZoneOptions"/>.</param>
-        public RequestTimeZoneMiddleware(ILogger logger, RequestTimeZoneOptions options)
+    /// <inheritdoc />
+    public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next)
+    {
+        if (httpContext == null)
+            throw new ArgumentNullException(nameof(httpContext));
+
+        if (next == null)
+            throw new ArgumentNullException(nameof(next));
+
+        var requestTimeZone = this.options.DefaultRequestTimeZone;
+        IRequestTimeZoneProvider winningProvider = null;
+
+        if (this.options.RequestTimeZoneProviders != null)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
-        }
-
-        /// <inheritdoc />
-        public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next)
-        {
-            if (httpContext == null)
-                throw new ArgumentNullException(nameof(httpContext));
-
-            if (next == null)
-                throw new ArgumentNullException(nameof(next));
-
-            var requestTimeZone = this.options.DefaultRequestTimeZone;
-            IRequestTimeZoneProvider winningProvider = null;
-
-            if (this.options.RequestTimeZoneProviders != null)
+            foreach (var provider in this.options.RequestTimeZoneProviders)
             {
-                foreach (var provider in this.options.RequestTimeZoneProviders)
+                var providerTimeZoneResult = await provider
+                    .DetermineProviderTimeZoneResult(httpContext);
+
+                if (providerTimeZoneResult == null)
+                    continue;
+
+                try
                 {
-                    var providerTimeZoneResult = await provider
-                        .DetermineProviderTimeZoneResult(httpContext);
-                    
-                    if (providerTimeZoneResult == null)
-                        continue;
+                    var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
 
-                    try
+                    if (result.TimeZone != null)
                     {
-                        var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
-
-                        if (result.TimeZone != null)
-                        {
-                            requestTimeZone = result;
-                            winningProvider = provider;
-                            break;
-                        }
-                    }
-                    catch (InvalidTimeZoneException ex)
-                    {
-                        this.logger.LogWarning(ex, $"Invalid TimeZone Id: {providerTimeZoneResult.TimeZoneName}");
-                    }
-                    catch (TimeZoneNotFoundException ex)
-                    {
-                        this.logger.LogWarning(ex, $"TimeZone Not Found: {providerTimeZoneResult.TimeZoneName}");
+                        requestTimeZone = result;
+                        winningProvider = provider;
+                        break;
                     }
                 }
+                catch (InvalidTimeZoneException ex)
+                {
+                    this.logger.LogWarning(ex, $"Invalid TimeZone Id: {providerTimeZoneResult.TimeZoneName}");
+                }
+                catch (TimeZoneNotFoundException ex)
+                {
+                    this.logger.LogWarning(ex, $"TimeZone Not Found: {providerTimeZoneResult.TimeZoneName}");
+                }
             }
-
-            httpContext.Features
-                .Set<IRequestTimeZoneFeature>(new RequestTimeZoneFeature(requestTimeZone, winningProvider));
-
-            httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
-
-            DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => requestTimeZone.TimeZone);
-
-            await next(httpContext);
         }
+
+        httpContext.Features
+            .Set<IRequestTimeZoneFeature>(new RequestTimeZoneFeature(requestTimeZone, winningProvider));
+
+        httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
+
+        DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => requestTimeZone.TimeZone);
+
+        await next(httpContext);
     }
 }

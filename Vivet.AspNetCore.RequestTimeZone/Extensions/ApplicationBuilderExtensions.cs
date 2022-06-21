@@ -1,26 +1,25 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
 
-namespace Vivet.AspNetCore.RequestTimeZone.Extensions
+namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
+
+/// <summary>
+/// Extension methods for adding the <see cref="RequestTimeZoneMiddleware"/> to an application.
+/// </summary>
+public static class ApplicationBuilderExtensions
 {
     /// <summary>
-    /// Extension methods for adding the <see cref="RequestTimeZoneMiddleware"/> to an application.
+    /// Adds the <see cref="RequestTimeZoneMiddleware"/> to automatically set timezone information
+    /// for requests based on information provided by the client.
     /// </summary>
-    public static class ApplicationBuilderExtensions
+    /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/>.</param>
+    /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
+    public static IApplicationBuilder UseRequestTimeZone(this IApplicationBuilder applicationBuilder)
     {
-        /// <summary>
-        /// Adds the <see cref="RequestTimeZoneMiddleware"/> to automatically set timezone information
-        /// for requests based on information provided by the client.
-        /// </summary>
-        /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/>.</param>
-        /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
-        public static IApplicationBuilder UseRequestTimeZone(this IApplicationBuilder applicationBuilder)
-        {
-            if (applicationBuilder == null)
-                throw new ArgumentNullException(nameof(applicationBuilder));
+        if (applicationBuilder == null)
+            throw new ArgumentNullException(nameof(applicationBuilder));
 
-            return applicationBuilder
-                .UseMiddleware<RequestTimeZoneMiddleware>();
-        }
+        return applicationBuilder
+            .UseMiddleware<RequestTimeZoneMiddleware>();
     }
 }

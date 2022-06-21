@@ -2,33 +2,32 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Vivet.AspNetCore.RequestTimeZone.Providers
+namespace Vivet.AspNetCore.RequestTimeZone.Providers;
+
+/// <summary>
+/// Determines the timezone information for a request via the 'tz' query string parameter.
+/// </summary>
+public class RequestTimeZoneQueryStringProvider : RequestTimeZoneProvider
 {
     /// <summary>
-    /// Determines the timezone information for a request via the 'tz' query string parameter.
+    /// The key that contains the timezone name.
     /// </summary>
-    public class RequestTimeZoneQueryStringProvider : RequestTimeZoneProvider
+    public virtual string QueryStringKey { get; set; } = "tz";
+
+    /// <inheritdoc />
+    public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
     {
-        /// <summary>
-        /// The key that contains the timezone name.
-        /// </summary>
-        public virtual string QueryStringKey { get; set; } = "tz";
+        if (httpContext == null)
+            throw new ArgumentNullException(nameof(httpContext));
 
-        /// <inheritdoc />
-        public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
-        {
-            if (httpContext == null)
-                throw new ArgumentNullException(nameof(httpContext));
+        var value = httpContext.Request
+            .Query[this.QueryStringKey];
 
-            var value = httpContext.Request
-                .Query[this.QueryStringKey];
+        if (string.IsNullOrEmpty(value))
+            return RequestTimeZoneProvider.nullProviderTimeZoneResult;
 
-            if (string.IsNullOrEmpty(value))
-                return RequestTimeZoneProvider.nullProviderTimeZoneResult;
+        var providerTimeZoneResult = new ProviderTimeZoneResult(value);
 
-            var providerTimeZoneResult = new ProviderTimeZoneResult(value);
-
-            return Task.FromResult(providerTimeZoneResult);
-        }
+        return Task.FromResult(providerTimeZoneResult);
     }
 }

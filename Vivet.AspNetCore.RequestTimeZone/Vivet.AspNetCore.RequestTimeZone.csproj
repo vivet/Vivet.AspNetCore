@@ -16,12 +16,11 @@
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
-			- Symbols package added to NuGet package.
-			- Code improvements.
+			- Cosmetic improvements.
 		</PackageReleaseNotes>
-		<Version>6.0.1.0</Version>
-		<FileVersion>6.0.1.0</FileVersion>
-		<AssemblyVersion>6.0.1.0</AssemblyVersion>
+		<Version>6.0.2.0</Version>
+		<FileVersion>6.0.2.0</FileVersion>
+		<AssemblyVersion>6.0.2.0</AssemblyVersion>
 		<PackageTags>asp netcore http request timezone middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
