@@ -18,9 +18,9 @@
 		<PackageReleaseNotes>
 			- Updated NuGet depdendencies.
 		</PackageReleaseNotes>
-		<Version>6.0.3.0</Version>
-		<FileVersion>6.0.3.0</FileVersion>
-		<AssemblyVersion>6.0.3.0</AssemblyVersion>
+		<Version>6.0.4.0</Version>
+		<FileVersion>6.0.4.0</FileVersion>
+		<AssemblyVersion>6.0.4.0</AssemblyVersion>
 		<PackageTags>asp netcore http request timezone middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
