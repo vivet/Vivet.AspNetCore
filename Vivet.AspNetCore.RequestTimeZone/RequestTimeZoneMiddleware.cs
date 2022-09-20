@@ -17,11 +17,11 @@ public class RequestTimeZoneMiddleware : IMiddleware
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="logger">The <see cref="ILogger"/>.</param>
+    /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="options">The <see cref="RequestTimeZoneOptions"/>.</param>
-    public RequestTimeZoneMiddleware(ILogger logger, RequestTimeZoneOptions options)
+    public RequestTimeZoneMiddleware(ILoggerFactory loggerFactory, RequestTimeZoneOptions options)
     {
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        this.logger = loggerFactory?.CreateLogger<RequestTimeZoneMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
         this.options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
@@ -74,7 +74,7 @@ public class RequestTimeZoneMiddleware : IMiddleware
 
         httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
 
-        DateTimeInfo.TimeZone = new ThreadLocal<TimeZoneInfo>(() => requestTimeZone.TimeZone);
+        DateTimeInfo.TimeZone.Value = requestTimeZone.TimeZone;
 
         await next(httpContext);
     }
