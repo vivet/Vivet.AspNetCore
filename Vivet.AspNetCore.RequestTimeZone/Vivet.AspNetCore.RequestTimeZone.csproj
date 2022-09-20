@@ -17,6 +17,10 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
 			- Updated NuGet depdendencies.
+			- Changed ThreadLocal to AsyncLocal for DateTimeInfo.
+			- Added services.AddRequestTimeZone, just accepting a string for default timezone and defaulting the rest of the options.
+			- Removed depdendency to ILogger. Now using ILoggerFactory.
+			- Removed registrering RequestTimeZone as depdendency, as it has no default constructor.
 		</PackageReleaseNotes>
 		<Version>6.0.4.0</Version>
 		<FileVersion>6.0.4.0</FileVersion>
@@ -34,7 +38,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
