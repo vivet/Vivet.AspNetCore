@@ -10,9 +10,8 @@ public static class DateTimeInfo
 {
     /// <summary>
     /// Time Zone.
-    /// Thread static variable to store timezone for each <see cref="Thread"/>.
     /// </summary>
-    public static ThreadLocal<TimeZoneInfo> TimeZone { get; set; } = new(() => TimeZoneInfo.FindSystemTimeZoneById("UTC"));
+    public static AsyncLocal<TimeZoneInfo> TimeZone { get; set; } = new(_ => TimeZoneInfo.FindSystemTimeZoneById("UTC"));
 
     /// <summary>
     /// Returns the local date time, based on the <see cref="TimeZone"/>.

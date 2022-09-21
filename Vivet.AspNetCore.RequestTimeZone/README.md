@@ -54,8 +54,8 @@ Finally, the library also contains a ```ThreadStatic``` accessor, called ```Date
 The implementation exposes the ```RequestTimezone```, as well an utc and local datetime that is based on the timezone. 
 
 ```csharp
-var utc = DateTimeInfo.Utc  // Gets utc datetime
-var local = DateTimeInfo.Local  // Gets local datetime
+var now = DateTimeInfo.Now  // Gets datetime
+var utc = DateTimeInfo.UtcNow  // Gets utc datetime
 var timezone = DateTimeInfo.TimeZone  // Gets the request timezone.
 ```
 
