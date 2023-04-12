@@ -8,19 +8,17 @@
 		<Product>AspNetCore RequestTimeZone</Product>
 		<Authors>Michael Vivet</Authors>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Description>
-			Middleware for handling timezone in http requests.
-			Similar implementation as Microsoft.AspNetCore.Localization.
-		</Description>
+		<Description>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
 			- Updated NuGets.
+			- Updated NuGet description.
 		</PackageReleaseNotes>
-		<Version>7.0.1.0</Version>
-		<FileVersion>7.0.1.0</FileVersion>
-		<AssemblyVersion>7.0.1.0</AssemblyVersion>
+		<Version>7.0.2.0</Version>
+		<FileVersion>7.0.2.0</FileVersion>
+		<AssemblyVersion>7.0.2.0</AssemblyVersion>
 		<PackageTags>asp netcore http request timezone middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
