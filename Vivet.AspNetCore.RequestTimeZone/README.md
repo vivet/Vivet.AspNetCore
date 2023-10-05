@@ -56,7 +56,7 @@ The implementation exposes the ```RequestTimezone```, as well an utc and local d
 ```csharp
 var now = DateTimeInfo.Now  // Gets datetime
 var utc = DateTimeInfo.UtcNow  // Gets utc datetime
-var timezone = DateTimeInfo.TimeZone  // Gets the request timezone.
+var timezone = DateTimeInfo.TimeZone.Value  // Gets the request timezone.
 ```
 
 ***

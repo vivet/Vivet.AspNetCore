@@ -13,11 +13,11 @@
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
-			- Updated NuGets.
+			- Updated readme.
 		</PackageReleaseNotes>
-		<Version>7.0.3.0</Version>
-		<FileVersion>7.0.3.0</FileVersion>
-		<AssemblyVersion>7.0.3.0</AssemblyVersion>
+		<Version>7.0.4.0</Version>
+		<FileVersion>7.0.4.0</FileVersion>
+		<AssemblyVersion>7.0.4.0</AssemblyVersion>
 		<PackageTags>asp netcore http request timezone middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
