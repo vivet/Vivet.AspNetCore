@@ -14,11 +14,10 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
 			- Updated NuGets.
-			- Updated NuGet description.
 		</PackageReleaseNotes>
-		<Version>7.0.2.0</Version>
-		<FileVersion>7.0.2.0</FileVersion>
-		<AssemblyVersion>7.0.2.0</AssemblyVersion>
+		<Version>7.0.3.0</Version>
+		<FileVersion>7.0.3.0</FileVersion>
+		<AssemblyVersion>7.0.3.0</AssemblyVersion>
 		<PackageTags>asp netcore http request timezone middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
@@ -32,11 +31,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
-	</ItemGroup>
-	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.11" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
 	</ItemGroup>
+
 	<ItemGroup>
 		<None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
 	</ItemGroup>
