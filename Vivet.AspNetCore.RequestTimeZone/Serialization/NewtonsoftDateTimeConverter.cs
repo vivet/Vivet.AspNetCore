@@ -52,6 +52,9 @@ public class NewtonsoftDateTimeConverter : DateTimeConverterBase
         if (writer == null)
             throw new ArgumentNullException(nameof(writer));
 
+        if (value == null)
+            throw new ArgumentNullException(nameof(value));
+
         DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 
         var timeZone = this.RequestTimeZone().TimeZone;
