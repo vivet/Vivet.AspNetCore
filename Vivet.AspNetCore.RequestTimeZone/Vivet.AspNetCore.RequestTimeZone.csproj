@@ -15,7 +15,6 @@
 		<PackageReleaseNotes>
 			- Updated readme.
 		</PackageReleaseNotes>
-		<PackageReadmeFile>..\README.md</PackageReadmeFile>
 		<PackageTags>asp netcore http request timezone middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
