@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
+		<Version>8.0.3.0</Version>
+		<FileVersion>8.0.3.0</FileVersion>
+		<AssemblyVersion>8.0.3.0</AssemblyVersion>
 		<LangVersion>latest</LangVersion>
 		<RepositoryType>Github</RepositoryType>
 		<RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
