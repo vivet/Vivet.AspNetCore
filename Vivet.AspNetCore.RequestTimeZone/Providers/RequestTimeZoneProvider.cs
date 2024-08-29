@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Middleware;
+using Vivet.AspNetCore.RequestTimeZone.Providers.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Providers;
 

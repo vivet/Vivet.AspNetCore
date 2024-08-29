@@ -13,7 +13,7 @@ The current timezone on a request is set in the Request TimeZone Middleware. The
 
 The default list goes from most specific to least specific. You can change the order and even add a custom timezone provider, similar to the implementation of ```Microsoft.AspNetCore.Localization```. If none of the providers can determine the request timezone, the ```DefaultRequestTimeZone``` is used.  
 
-#### Configuration
+#### Registration
 To configure the Request TimeZone Middleware, first add the required services to the ```IServiceCollection```, as shown below.  
 ```csharp
 services

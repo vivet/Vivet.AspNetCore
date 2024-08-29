@@ -1,7 +1,8 @@
 ﻿using System;
-using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Features.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Providers.Interfaces;
 
-namespace Vivet.AspNetCore.RequestTimeZone;
+namespace Vivet.AspNetCore.RequestTimeZone.Features;
 
 /// <summary>
 /// Provides the current request's timezone information.

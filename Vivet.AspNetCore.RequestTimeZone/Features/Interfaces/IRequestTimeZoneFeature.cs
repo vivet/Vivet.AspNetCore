@@ -1,4 +1,6 @@
-﻿namespace Vivet.AspNetCore.RequestTimeZone.Interfaces;
+﻿using Vivet.AspNetCore.RequestTimeZone.Providers.Interfaces;
+
+namespace Vivet.AspNetCore.RequestTimeZone.Features.Interfaces;
 
 /// <summary>
 /// Represents the feature that provides the current request's timezone information.

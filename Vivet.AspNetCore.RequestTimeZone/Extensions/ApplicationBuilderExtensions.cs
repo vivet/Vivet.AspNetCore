@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Builder;
+using Vivet.AspNetCore.RequestTimeZone.Middleware;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
 

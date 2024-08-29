@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Vivet.AspNetCore.RequestTimeZone.Enums;
+using Vivet.AspNetCore.RequestTimeZone.Middleware;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
 

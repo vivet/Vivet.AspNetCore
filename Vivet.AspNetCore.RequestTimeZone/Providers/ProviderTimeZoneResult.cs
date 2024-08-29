@@ -1,5 +1,5 @@
 ﻿using System;
-using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Providers.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Providers;
 

@@ -2,33 +2,34 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0</TargetFrameworks>
-		<Version>8.1.0.0</Version>
-		<FileVersion>8.1.0.0</FileVersion>
-		<AssemblyVersion>8.1.0.0</AssemblyVersion>
+		<Version>0.1.0.0</Version>
+		<FileVersion>0.1.0.0</FileVersion>
+		<AssemblyVersion>0.1.0.0</AssemblyVersion>
 		<LangVersion>latest</LangVersion>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
 		<License>LICENSE</License>
-		<Product>AspNetCore RequestTimeZone</Product>
+		<Product>AspNetCore RequestVirusScan</Product>
 		<Authors>Michael Vivet</Authors>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Description>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Description>
+		<Description>Middleware for scanning uplaoded files for virusses.</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
-			- Updated NuGets.
+		    - Initial
 		</PackageReleaseNotes>
-		<PackageTags>asp netcore http request timezone middleware</PackageTags>
+		<PackageTags>asp netcore http request virus-scan clamav middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<WarningsAsErrors />
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<NoWarn />
-		<DocumentationFile>$(MSBuildThisFileDirectory)\bin\$(Configuration)\Vivet.AspNetCore.RequestTimeZone.xml</DocumentationFile>
+		<DocumentationFile>$(MSBuildThisFileDirectory)\bin\$(Configuration)\Vivet.AspNetCore.RequestVirusScan.xml</DocumentationFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -38,9 +39,10 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+		<PackageReference Include="AspNetCore.HealthChecks.Network" Version="8.0.1" />
+		<PackageReference Include="nClam" Version="9.0.0" />
 	</ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Vivet.AspNetCore.RequestTimeZone.ModelBinders;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
 

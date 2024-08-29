@@ -2,10 +2,12 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Features;
+using Vivet.AspNetCore.RequestTimeZone.Features.Interfaces;
 using Vivet.AspNetCore.RequestTimeZone.Providers;
+using Vivet.AspNetCore.RequestTimeZone.Providers.Interfaces;
 
-namespace Vivet.AspNetCore.RequestTimeZone;
+namespace Vivet.AspNetCore.RequestTimeZone.Middleware;
 
 /// <inheritdoc />
 public class RequestTimeZoneMiddleware : IMiddleware

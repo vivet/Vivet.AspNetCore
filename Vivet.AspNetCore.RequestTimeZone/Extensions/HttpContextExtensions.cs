@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
-using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Features.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
 

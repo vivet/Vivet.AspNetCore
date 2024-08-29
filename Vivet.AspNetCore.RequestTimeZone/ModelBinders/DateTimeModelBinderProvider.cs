@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Vivet.AspNetCore.RequestTimeZone;
+namespace Vivet.AspNetCore.RequestTimeZone.ModelBinders;
 
 /// <inheritdoc />
 public class DateTimeModelBinderProvider : IModelBinderProvider

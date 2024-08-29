@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Vivet.AspNetCore.RequestTimeZone.Enums;
-using Vivet.AspNetCore.RequestTimeZone.Interfaces;
+using Vivet.AspNetCore.RequestTimeZone.Middleware;
 using Vivet.AspNetCore.RequestTimeZone.Providers;
+using Vivet.AspNetCore.RequestTimeZone.Providers.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone;
 
