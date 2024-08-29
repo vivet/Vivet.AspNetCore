@@ -15,8 +15,8 @@
 		<Description>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>
 			- Updated NuGets.
 		</PackageReleaseNotes>
@@ -34,6 +34,7 @@
 
 	<ItemGroup>
 		<None Include="LICENSE" Pack="true" Visible="false" PackagePath="" />
+		<None Include="README.md" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>
