@@ -10,7 +10,7 @@ This library uses ClamAV for scanning and detecting virusses and malware in file
 ***
 
 #### Registration
-To configure the Request TimeZone Middleware, first add the required services to the ```IServiceCollection```, as shown below.  
+To configure the Request Virus Scan Middleware, first add the required services to the ```IServiceCollection```, as shown below.  
 ```csharp
 services
     .AddRequestVirusScan(x => 
