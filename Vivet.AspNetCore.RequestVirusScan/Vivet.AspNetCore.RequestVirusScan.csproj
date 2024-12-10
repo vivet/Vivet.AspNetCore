@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
-		<Version>0.1.1.0</Version>
-		<FileVersion>0.1.1.0</FileVersion>
-		<AssemblyVersion>0.1.1.0</AssemblyVersion>
+		<TargetFrameworks>net9.0</TargetFrameworks>
+		<Version>9.0.0.0</Version>
+		<FileVersion>9.0.0.0</FileVersion>
+		<AssemblyVersion>9.0.0.0</AssemblyVersion>
 		<LangVersion>latest</LangVersion>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
@@ -18,7 +18,7 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>
-		    - Initial
+			- Updated to .NET 9.
 		</PackageReleaseNotes>
 		<PackageTags>asp netcore http request virus-scan clamav middleware</PackageTags>
 		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
