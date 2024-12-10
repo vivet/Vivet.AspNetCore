@@ -30,7 +30,7 @@ public class ClamAvApi
     {
         this.Options = clamAvOptions ?? throw new ArgumentNullException(nameof(clamAvOptions));
 
-        this.clamClient = new ClamClient(Options.Host, Options.Port)
+        this.clamClient = new ClamClient(this.Options.Host, this.Options.Port)
         {
             MaxChunkSize = 131072,
             MaxStreamSize = int.MaxValue
