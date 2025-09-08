@@ -63,7 +63,6 @@ jobs:
           { 
               throw "Pack failed";
           };
-          
       - name: GitHub Release
         if: github.ref == 'refs/heads/master'
         uses: ncipollo/release-action@v1
