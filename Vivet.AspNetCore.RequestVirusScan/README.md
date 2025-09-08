@@ -1,5 +1,5 @@
 # Vivet.AspNetCore.RequestVirusScan
-[![Build status](https://ci.appveyor.com/api/projects/status/182f7gcym49fc5sq/branch/master?svg=true)](https://ci.appveyor.com/project/vivet/vivet-aspnetcore/branch/master)
+[![Build and Deploy](https://github.com/Vivet/Vivet.AspNetCore/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/Vivet/Vivet.AspNetCore/actions/workflows/build-and-deploy.yml)
 [![NuGet](https://img.shields.io/nuget/dt/Vivet.AspNetCore.RequestVirusScan.svg)](https://www.nuget.org/packages/Vivet.AspNetCore.RequestVirusScan/)
 [![NuGet](https://img.shields.io/nuget/v/Vivet.AspNetCore.RequestVirusScan.svg)](https://www.nuget.org/packages/Vivet.AspNetCore.RequestVirusScan/)  
 
