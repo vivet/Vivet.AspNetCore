@@ -8,7 +8,7 @@ on:
       - master 
 env:
   APP_NAME: Vivet.AspNetCore
-  VERSION: 9.0.10
+  VERSION: 9.0.11
   NUGET_HOST: https://api.nuget.org/v3/index.json
   NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
 jobs:
