@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Vivet.AspNetCore.RequestVirusScan.Middleware;
 
@@ -63,7 +64,7 @@ public static class ServiceCollectionExtensions
         {
             services
                 .AddHealthChecks()
-                .AddTcpHealthCheck(x => x.AddHost(options.Host, options.Port), "clamav");
+                .AddTcpHealthCheck(x => x.AddHost(options.Host, options.Port), "clamav", options.HealthCheckFailureStatus);
         }
 
         return services;
