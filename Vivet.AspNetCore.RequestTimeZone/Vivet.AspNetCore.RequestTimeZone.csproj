@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
-		<Version>10.0.2.0</Version>
-		<FileVersion>10.0.2.0</FileVersion>
-		<AssemblyVersion>10.0.2.0</AssemblyVersion>
+		<Version>10.0.3.0</Version>
+		<FileVersion>10.0.3.0</FileVersion>
+		<AssemblyVersion>10.0.3.0</AssemblyVersion>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<Configurations>Debug;Release</Configurations>
 		<LangVersion>latest</LangVersion>
@@ -24,9 +24,7 @@
 		<Summary>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Summary>
 		<Description></Description>
 		<PackageReleaseNotes>
-			- Enabled nullable (and other csproj changes)
-			- Changed RequestTimeZoneOptions.Id to RequestTimeZoneOptions.DefaultTimeZone
-			- Cosmetic refactoring
+			- Removed Microsoft.AspNetCore.App and added NuGets.
 		</PackageReleaseNotes>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryBranch>master</RepositoryBranch>
@@ -52,11 +50,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.1" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
