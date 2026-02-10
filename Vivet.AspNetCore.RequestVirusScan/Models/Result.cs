@@ -11,7 +11,7 @@ public class Result
     /// <summary>
     /// Raw.
     /// </summary>
-    public virtual string Raw { get; set; }
+    public virtual string? Raw { get; set; }
 
     /// <summary>
     /// Type.
@@ -21,5 +21,5 @@ public class Result
     /// <summary>
     /// Infected Files.
     /// </summary>
-    public virtual IEnumerable<InfectedFile> InfectedFiles { get; set; }
+    public virtual IEnumerable<InfectedFile> InfectedFiles { get; set; } = [];
 }

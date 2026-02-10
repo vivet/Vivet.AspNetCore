@@ -7,17 +7,15 @@ namespace Vivet.AspNetCore.RequestVirusScan;
 /// </summary>
 public class ClamAvOptions
 {
-    internal static string SectionName => "ClamAv";
-
     /// <summary>
     /// Host.
     /// </summary>
-    public virtual string Host { get; set; }
+    public virtual string Host { get; set; } = null!;
 
     /// <summary>
     /// Port.
     /// </summary>
-    public virtual int Port { get; set; }
+    public virtual int Port { get; set; } = 3310;
 
     /// <summary>
     /// Use Health Check.

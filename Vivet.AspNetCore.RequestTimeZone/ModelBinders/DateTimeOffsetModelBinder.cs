@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace Vivet.AspNetCore.RequestTimeZone.ModelBinders;
 
 /// <inheritdoc />
-public class DateTimeModelBinder : IModelBinder
+public class DateTimeOffsetModelBinder : IModelBinder
 {
     /// <summary>
     /// Request Time Zone.
@@ -17,7 +17,7 @@ public class DateTimeModelBinder : IModelBinder
     /// Constructor.
     /// </summary>
     /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>
-    public DateTimeModelBinder(Func<RequestTimeZone> requestTimeZone)
+    public DateTimeOffsetModelBinder(Func<RequestTimeZone> requestTimeZone)
     {
         this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
     }
@@ -25,8 +25,7 @@ public class DateTimeModelBinder : IModelBinder
     /// <inheritdoc />
     public virtual Task BindModelAsync(ModelBindingContext bindingContext)
     {
-        if (bindingContext == null)
-            throw new ArgumentNullException(nameof(bindingContext));
+        ArgumentNullException.ThrowIfNull(bindingContext);
 
         var valueProviderResult = bindingContext.ValueProvider
             .GetValue(bindingContext.ModelName);

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using nClam;
 using Vivet.AspNetCore.RequestVirusScan.Models;
 using Vivet.AspNetCore.RequestVirusScan.Models.Enums;
@@ -20,17 +21,17 @@ public class ClamAvApi
     /// <summary>
     /// Options.
     /// </summary>
-    public ClamAvOptions Options { get; set; }
+    public IOptionsMonitor<ClamAvOptions> Options { get; set; }
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="clamAvOptions">The <see cref="ClamAvOptions"/>.</param>
-    public ClamAvApi(ClamAvOptions clamAvOptions)
+    /// <param name="clamAvOptions">The <see cref="IOptionsMonitor{ClamAvOptions}"/>.</param>
+    public ClamAvApi(IOptionsMonitor<ClamAvOptions> clamAvOptions)
     {
         this.Options = clamAvOptions ?? throw new ArgumentNullException(nameof(clamAvOptions));
 
-        this.clamClient = new ClamClient(this.Options.Host, this.Options.Port)
+        this.clamClient = new ClamClient(this.Options.CurrentValue.Host, this.Options.CurrentValue.Port)
         {
             MaxChunkSize = 131072,
             MaxStreamSize = int.MaxValue

@@ -14,7 +14,7 @@ public interface IRequestTimeZoneFeature
 
     /// <summary>
     /// The <see cref="IRequestTimeZoneProvider"/> that determined the request's timezone information.
-    /// If the value is <c>null</c> then no provider was used and the request's timezone was se to the value of <see cref="RequestTimeZoneOptions.DefaultRequestTimeZone"/>.
+    /// If the value is <c>null</c> then no provider was used and the request's timezone was se to the value of <see cref="RequestTimeZoneOptions.DefaultTimeZone"/>.
     /// </summary>
-    IRequestTimeZoneProvider Provider { get; }
+    IRequestTimeZoneProvider? Provider { get; }
 }

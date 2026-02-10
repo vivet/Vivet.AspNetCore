@@ -15,19 +15,20 @@ public class RequestTimeZoneHeaderProvider : RequestTimeZoneProvider
     public static string Headerkey { get; set; } = "tz";
 
     /// <inheritdoc />
-    public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
+    public override async Task<ProviderTimeZoneResult?> DetermineProviderTimeZoneResult(HttpContext httpContext)
     {
-        if (httpContext == null)
-            throw new ArgumentNullException(nameof(httpContext));
+        ArgumentNullException.ThrowIfNull(httpContext);
 
         var value = httpContext.Request
             .Headers[RequestTimeZoneHeaderProvider.Headerkey];
 
         if (string.IsNullOrEmpty(value))
-            return RequestTimeZoneProvider.nullProviderTimeZoneResult;
+        {
+            return null;
+        }
 
-        var providerTimeZoneResult = new ProviderTimeZoneResult(value);
+        var providerTimeZoneResult = new ProviderTimeZoneResult(value.ToString());
 
-        return Task.FromResult(providerTimeZoneResult);
+        return await Task.FromResult(providerTimeZoneResult);
     }
 }

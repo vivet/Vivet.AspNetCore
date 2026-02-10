@@ -17,9 +17,9 @@ public static class DateTimeInfo
     /// Returns the local date time, based on the <see cref="TimeZone"/>.
     /// The <see cref="DateTimeOffset.UtcNow"/> converted by TimeZoneId.
     /// </summary>
-    public static DateTimeOffset Now => DateTimeInfo.TimeZone.Value != null
-        ? TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTimeOffset.UtcNow, DateTimeInfo.TimeZone.Value.Id)
-        : DateTimeOffset.UtcNow;
+    public static DateTimeOffset Now => DateTimeInfo.TimeZone.Value == null
+        ? DateTimeOffset.UtcNow
+        : TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTimeOffset.UtcNow, DateTimeInfo.TimeZone.Value.Id);
 
     /// <summary>
     /// Returns the <see cref="DateTimeOffset.UtcNow"/>.

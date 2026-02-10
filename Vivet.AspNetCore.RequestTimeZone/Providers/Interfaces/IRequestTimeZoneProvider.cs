@@ -13,5 +13,5 @@ public interface IRequestTimeZoneProvider
     /// </summary>
     /// <param name="httpContext">The <see cref="HttpContext"/>.</param>
     /// <returns>The <see cref="ProviderTimeZoneResult"/>.</returns>
-    Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext);
+    Task<ProviderTimeZoneResult?> DetermineProviderTimeZoneResult(HttpContext httpContext);
 }

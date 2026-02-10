@@ -8,10 +8,10 @@ public record InfectedFile
     /// <summary>
     /// File Name.
     /// </summary>
-    public virtual string FileName { get; set; }
+    public virtual string FileName { get; set; } = null!;
 
     /// <summary>
     /// Virus Name
     /// </summary>
-    public virtual string VirusName { get; set; }
+    public virtual string? VirusName { get; set; }
 }

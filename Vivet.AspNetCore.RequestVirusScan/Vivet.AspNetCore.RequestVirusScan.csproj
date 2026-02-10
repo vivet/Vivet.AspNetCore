@@ -1,40 +1,53 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net10.0</TargetFrameworks>
-		<Version>10.0.1.0</Version>
-		<FileVersion>10.0.1.0</FileVersion>
-		<AssemblyVersion>10.0.1.0</AssemblyVersion>
+		<TargetFramework>net10.0</TargetFramework>
+		<Version>10.0.2.0</Version>
+		<FileVersion>10.0.2.0</FileVersion>
+		<AssemblyVersion>10.0.2.0</AssemblyVersion>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<Configurations>Debug;Release</Configurations>
 		<LangVersion>latest</LangVersion>
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<nullable>enable</nullable>
 		<License>LICENSE</License>
-		<Product>AspNetCore RequestVirusScan</Product>
-		<Authors>Michael Vivet</Authors>
-		<NeutralLanguage>en</NeutralLanguage>
-		<Description>Middleware for scanning uplaoded files for virusses.</Description>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageReleaseNotes>
-			- Added configuration for Failure status for health-check.
-		</PackageReleaseNotes>
-		<PackageTags>asp netcore http request virus-scan clamav middleware</PackageTags>
-		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
+		<NoWarn />
 		<WarningsAsErrors />
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<NoWarn />
-		<DocumentationFile>$(MSBuildThisFileDirectory)\bin\$(Configuration)\Vivet.AspNetCore.RequestVirusScan.xml</DocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IsPackable>true</IsPackable>
+		<Authors>Michael Vivet</Authors>
+		<Owners>Michael Vivet</Owners>
+		<Product>$(ProjectName)</Product>
+		<Summary>Middleware for scanning uplaoded files for virusses</Summary>
+		<Description>Middleware for scanning uplaoded files for virusses.</Description>
+		<PackageReleaseNotes>
+			- Enabled nullable
+			- Cosmetic refactoring
+		</PackageReleaseNotes>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryBranch>master</RepositoryBranch>
+		<RepositoryUrl>https://github.com/vivet/Vivet.AspNetCore.git</RepositoryUrl>
+		<RepositoryCommit>$(GitCommitHash)</RepositoryCommit>
+		<EmbedAllSources>true</EmbedAllSources>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageVersion>$(Version)</PackageVersion>
+		<PackageTags>asp netcore http request virus-scan clamav middleware</PackageTags>
+		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore/tree/master/$(ProjectName)</PackageProjectUrl>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/vivet/Vivet.AspNetCore</PackageProjectUrl>
 		<OpenApiGenerateDocuments>false</OpenApiGenerateDocuments>
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="LICENSE" Pack="true" Visible="false" PackagePath="" />
+		<None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />
 		<None Include="README.md" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Vivet.AspNetCore.RequestTimeZone.Enums;
 using Vivet.AspNetCore.RequestTimeZone.Middleware;
 using Vivet.AspNetCore.RequestTimeZone.Providers;
@@ -11,37 +12,33 @@ namespace Vivet.AspNetCore.RequestTimeZone;
 /// </summary>
 public class RequestTimeZoneOptions
 {
-    private readonly RequestTimeZone defaultRequestTimeZone = new("UTC");
-
     /// <summary>
-    /// Gets or sets the default timezone to use for requests.
-    /// </summary>
-    public virtual RequestTimeZone DefaultRequestTimeZone => string.IsNullOrEmpty(this.Id)
-        ? this.defaultRequestTimeZone
-        : new RequestTimeZone(this.Id);
-
-    /// <summary>
-    /// Id.
+    /// Default TimeZone Id.
+    /// The timezone id used if none is specified in the <c>tz</c> header in a request.
     /// The timezone identifier.
     /// </summary>
-    public virtual string Id { get; set; }
+    [Required]
+    public virtual string DefaultTimeZone { get; set; } = "UTC";
 
     /// <summary>
     /// Enable Request To Utc.
     /// Enables conversion of date time values in request to UTC.
     /// </summary>
-    public virtual bool EnableRequestToUtc { get; set; }
+    [Required]
+    public virtual bool EnableRequestToUtc { get; set; } = true;
 
     /// <summary>
     /// Enable Response To Local.
     /// Enables conversion of date time values in response to local.
     /// </summary>
-    public virtual bool EnableResponseToLocal { get; set; }
+    [Required]
+    public virtual bool EnableResponseToLocal { get; set; } = true;
 
     /// <summary>
     /// Json Serializer Type.
     /// The serializer used with the application.
     /// </summary>
+    [Required]
     public virtual JsonSerializerType JsonSerializerType { get; set; } = JsonSerializerType.Newtonsoft;
 
     /// <summary>
@@ -54,6 +51,7 @@ public class RequestTimeZoneOptions
     ///     <item><description><see cref="RequestTimeZoneCookieProvider"/></description></item>
     /// </list>
     /// </summary>
+    [Required]
     public IList<IRequestTimeZoneProvider> RequestTimeZoneProviders { get; set; }
 
     /// <summary>

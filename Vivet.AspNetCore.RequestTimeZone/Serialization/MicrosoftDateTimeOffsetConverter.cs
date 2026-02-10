@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace Vivet.AspNetCore.RequestTimeZone.Serialization;
 
 /// <inheritdoc />
-public class MicrosoftDateTimeConverter : JsonConverter<DateTimeOffset?>
+public class MicrosoftDateTimeOffsetConverter : JsonConverter<DateTimeOffset?>
 {
     /// <summary>
     /// Request Time Zone.
@@ -16,18 +16,23 @@ public class MicrosoftDateTimeConverter : JsonConverter<DateTimeOffset?>
     /// Constructor.
     /// </summary>
     /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>
-    public MicrosoftDateTimeConverter(Func<RequestTimeZone> requestTimeZone)
+    public MicrosoftDateTimeOffsetConverter(Func<RequestTimeZone> requestTimeZone)
     {
         this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
     }
 
     /// <inheritdoc />
-    public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions? options)
     {
-        var value = reader.GetString();
+        ArgumentNullException.ThrowIfNull(typeToConvert);
+
+        var value = reader
+            .GetString();
 
         if (value == null)
+        {
             return null;
+        }
 
         DateTimeOffset.TryParse(value, out var parsedDateTime);
 
@@ -35,10 +40,9 @@ public class MicrosoftDateTimeConverter : JsonConverter<DateTimeOffset?>
     }
 
     /// <inheritdoc />
-    public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions? options)
     {
-        if (writer == null)
-            throw new ArgumentNullException(nameof(writer));
+        ArgumentNullException.ThrowIfNull(writer);
 
         DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 

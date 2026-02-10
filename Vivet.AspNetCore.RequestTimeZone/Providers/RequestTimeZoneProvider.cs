@@ -12,16 +12,10 @@ namespace Vivet.AspNetCore.RequestTimeZone.Providers;
 public abstract class RequestTimeZoneProvider : IRequestTimeZoneProvider
 {
     /// <summary>
-    /// Result that indicates that this instance of <see cref="RequestTimeZoneProvider" />
-    /// could not determine the request timezone.
-    /// </summary>
-    protected static readonly Task<ProviderTimeZoneResult> nullProviderTimeZoneResult = Task.FromResult(default(ProviderTimeZoneResult));
-
-    /// <summary>
     /// The current options for the <see cref="RequestTimeZoneMiddleware"/>.
     /// </summary>
-    public RequestTimeZoneOptions Options { get; set; }
+    public RequestTimeZoneOptions Options { get; set; } = null!;
 
     /// <inheritdoc />
-    public abstract Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext);
+    public abstract Task<ProviderTimeZoneResult?> DetermineProviderTimeZoneResult(HttpContext httpContext);
 }

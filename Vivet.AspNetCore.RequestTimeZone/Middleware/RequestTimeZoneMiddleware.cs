@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Vivet.AspNetCore.RequestTimeZone.Features;
 using Vivet.AspNetCore.RequestTimeZone.Features.Interfaces;
 using Vivet.AspNetCore.RequestTimeZone.Providers;
@@ -13,16 +14,16 @@ namespace Vivet.AspNetCore.RequestTimeZone.Middleware;
 public class RequestTimeZoneMiddleware : IMiddleware
 {
     private readonly ILogger logger;
-    private readonly RequestTimeZoneOptions options;
+    private readonly IOptionsMonitor<RequestTimeZoneOptions> options;
 
     /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="options">The <see cref="RequestTimeZoneOptions"/>.</param>
-    public RequestTimeZoneMiddleware(ILoggerFactory loggerFactory, RequestTimeZoneOptions options)
+    public RequestTimeZoneMiddleware(ILoggerFactory loggerFactory, IOptionsMonitor<RequestTimeZoneOptions> options)
     {
-        this.logger = loggerFactory?.CreateLogger<RequestTimeZoneMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
+        this.logger = loggerFactory.CreateLogger<RequestTimeZoneMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
         this.options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
@@ -35,47 +36,47 @@ public class RequestTimeZoneMiddleware : IMiddleware
         if (next == null)
             throw new ArgumentNullException(nameof(next));
 
-        var requestTimeZone = this.options.DefaultRequestTimeZone;
-        IRequestTimeZoneProvider winningProvider = null;
+        var requestTimeZone = new RequestTimeZone(this.options.CurrentValue.DefaultTimeZone);
 
-        if (this.options.RequestTimeZoneProviders != null)
+        IRequestTimeZoneProvider? winningProvider = null;
+
+        foreach (var provider in this.options.CurrentValue.RequestTimeZoneProviders)
         {
-            foreach (var provider in this.options.RequestTimeZoneProviders)
+            var providerTimeZoneResult = await provider
+                .DetermineProviderTimeZoneResult(httpContext);
+
+            if (providerTimeZoneResult == null)
             {
-                var providerTimeZoneResult = await provider
-                    .DetermineProviderTimeZoneResult(httpContext);
+                continue;
+            }
 
-                if (providerTimeZoneResult == null)
-                    continue;
+            try
+            {
+                var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
 
-                try
-                {
-                    var result = new RequestTimeZone(providerTimeZoneResult.TimeZoneName);
+                requestTimeZone = result;
+                winningProvider = provider;
 
-                    if (result.TimeZone != null)
-                    {
-                        requestTimeZone = result;
-                        winningProvider = provider;
-                        break;
-                    }
-                }
-                catch (InvalidTimeZoneException ex)
-                {
-                    this.logger.LogWarning(ex, $"Invalid TimeZone Id: {providerTimeZoneResult.TimeZoneName}");
-                }
-                catch (TimeZoneNotFoundException ex)
-                {
-                    this.logger.LogWarning(ex, $"TimeZone Not Found: {providerTimeZoneResult.TimeZoneName}");
-                }
+                break;
+            }
+            catch (InvalidTimeZoneException ex)
+            {
+                this.logger
+                    .LogWarning(ex, $"Invalid TimeZone Id: {providerTimeZoneResult.TimeZoneName}");
+            }
+            catch (TimeZoneNotFoundException ex)
+            {
+                this.logger
+                    .LogWarning(ex, $"TimeZone Not Found: {providerTimeZoneResult.TimeZoneName}");
             }
         }
 
         httpContext.Features
             .Set<IRequestTimeZoneFeature>(new RequestTimeZoneFeature(requestTimeZone, winningProvider));
 
-        httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
-
         DateTimeInfo.TimeZone.Value = requestTimeZone.TimeZone;
+
+        httpContext.Response.Headers[RequestTimeZoneHeaderProvider.Headerkey] = requestTimeZone.TimeZone.Id;
 
         await next(httpContext);
     }
