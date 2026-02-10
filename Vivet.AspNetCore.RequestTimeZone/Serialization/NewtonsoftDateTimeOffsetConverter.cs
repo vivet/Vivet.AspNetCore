@@ -1,12 +1,11 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using System;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Serialization;
 
 /// <inheritdoc />
-public class NewtonsoftDateTimeConverter : DateTimeConverterBase
+public class NewtonsoftDateTimeOffsetConverter : DateTimeConverterBase
 {
     /// <summary>
     /// Request Time Zone.
@@ -17,7 +16,7 @@ public class NewtonsoftDateTimeConverter : DateTimeConverterBase
     /// Constructor.
     /// </summary>
     /// <param name="requestTimeZone">The <see cref="RequestTimeZone"/>.</param>
-    public NewtonsoftDateTimeConverter(Func<RequestTimeZone> requestTimeZone)
+    public NewtonsoftDateTimeOffsetConverter(Func<RequestTimeZone> requestTimeZone)
     {
         this.RequestTimeZone = requestTimeZone ?? throw new ArgumentNullException(nameof(requestTimeZone));
     }
@@ -31,15 +30,16 @@ public class NewtonsoftDateTimeConverter : DateTimeConverterBase
     }
 
     /// <inheritdoc />
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer? serializer)
     {
-        if (reader == null)
-            throw new ArgumentNullException(nameof(reader));
+        ArgumentNullException.ThrowIfNull(reader);
 
         var value = reader.Value;
 
         if (value == null)
+        {
             return null;
+        }
 
         DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 
@@ -47,13 +47,14 @@ public class NewtonsoftDateTimeConverter : DateTimeConverterBase
     }
 
     /// <inheritdoc />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer? serializer)
     {
-        if (writer == null)
-            throw new ArgumentNullException(nameof(writer));
+        ArgumentNullException.ThrowIfNull(writer);
 
         if (value == null)
-            throw new ArgumentNullException(nameof(value));
+        {
+            return;
+        }
 
         DateTimeOffset.TryParse(value.ToString(), out var parsedDateTime);
 

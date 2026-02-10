@@ -15,22 +15,11 @@ To configure the Request Virus Scan Middleware, first add the required services 
 services
     .AddRequestVirusScan(x => 
     {
-        // Configuration.
+        x.Host = null,
+        x.Port = 3310,
+        UseHealthCheck = true,
+        HealthCheckFailureStatus = "Unhealthy"
     });
-```
-  
-or, read the configuration from the ```clamav``` section in ```app.settings.json```,  
-```json
-"ClamAv": {
-    "Host": "",
-    "Port": 0,
-    "UseHealthCheck": true
-}
-```
-...and register.
-```csharp
-services
-    .AddRequestVirusScan();
 ```
   
 Next, register the middleware in the pipeline, as shown below.   

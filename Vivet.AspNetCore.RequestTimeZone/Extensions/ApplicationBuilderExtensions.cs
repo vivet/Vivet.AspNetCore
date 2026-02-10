@@ -17,8 +17,7 @@ public static class ApplicationBuilderExtensions
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestTimeZone(this IApplicationBuilder applicationBuilder)
     {
-        if (applicationBuilder == null)
-            throw new ArgumentNullException(nameof(applicationBuilder));
+        ArgumentNullException.ThrowIfNull(applicationBuilder);
 
         return applicationBuilder
             .UseMiddleware<RequestTimeZoneMiddleware>();

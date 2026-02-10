@@ -17,14 +17,12 @@ The default list goes from most specific to least specific. You can change the o
 To configure the Request TimeZone Middleware, first add the required services to the ```IServiceCollection```, as shown below.  
 ```csharp
 services
-    .AddRequestTimeZone("myDefaultTimeZone");
-```
-Or,
-```csharp
-services
     .AddRequestTimeZone(x => 
     {
-        // Configuration.
+        x.DefaultTimeZone = "UTC";
+        x.EnableRequestToUtc = true;
+        x.EnableResponseToLocal = true;
+        x.JsonSerializerType = JsonSerializerType.Newtonsoft;
     });
 ```
 

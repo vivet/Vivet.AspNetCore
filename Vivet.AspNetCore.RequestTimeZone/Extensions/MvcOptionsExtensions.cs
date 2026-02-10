@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using Vivet.AspNetCore.RequestTimeZone.ModelBinders;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
@@ -10,17 +10,16 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
 public static class MvcOptionsExtensions
 {
     /// <summary>
-    /// Inserts the <see cref="DateTimeModelBinderProvider"/> as model binder provider.
+    /// Inserts the <see cref="DateTimeOffsetModelBinderProvider"/> as model binder provider.
     /// </summary>
     /// <param name="options">The <see cref="MvcOptions"/>.</param>
     /// <returns>The <see cref="MvcOptions"/>.</returns>
     public static MvcOptions AddDateTimeModelBinderProvider(this MvcOptions options)
     {
-        if (options == null)
-            throw new ArgumentNullException(nameof(options));
+        ArgumentNullException.ThrowIfNull(options);
 
         options.ModelBinderProviders
-            .Insert(0, new DateTimeModelBinderProvider(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
+            .Insert(0, new DateTimeOffsetModelBinderProvider(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value!)));
 
         return options;
     }

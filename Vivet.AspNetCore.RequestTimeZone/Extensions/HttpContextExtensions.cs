@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using Vivet.AspNetCore.RequestTimeZone.Features.Interfaces;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
@@ -14,10 +14,9 @@ public static class HttpContextExtensions
     /// </summary>
     /// <param name="httpContext">The <see cref="HttpContext"/>.</param>
     /// <returns>The token.</returns>
-    public static TimeZoneInfo GetUserTimeZone(this HttpContext httpContext)
+    public static TimeZoneInfo? GetUserTimeZone(this HttpContext httpContext)
     {
-        if (httpContext == null)
-            throw new ArgumentNullException(nameof(httpContext));
+        ArgumentNullException.ThrowIfNull(httpContext);
 
         return httpContext.Features
             .Get<IRequestTimeZoneFeature>()?

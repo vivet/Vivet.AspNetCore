@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using Vivet.AspNetCore.RequestTimeZone.Serialization;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
@@ -10,17 +10,16 @@ namespace Vivet.AspNetCore.RequestTimeZone.Extensions;
 public static class MvcJsonOptionsExtensions
 {
     /// <summary>
-    /// Inserts <see cref="MicrosoftDateTimeConverter"/> as serialization converter.
+    /// Inserts <see cref="MicrosoftDateTimeOffsetConverter"/> as serialization converter.
     /// </summary>
     /// <param name="options">The <see cref="JsonOptions"/>.</param>
     /// <returns>The <see cref="JsonOptions"/>.</returns>
     public static JsonOptions AddDateTimeConverter(this JsonOptions options)
     {
-        if (options == null)
-            throw new ArgumentNullException(nameof(options));
+        ArgumentNullException.ThrowIfNull(options);
 
         options.JsonSerializerOptions.Converters
-            .Add(new MicrosoftDateTimeConverter(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value)));
+            .Add(new MicrosoftDateTimeOffsetConverter(() => new RequestTimeZone(DateTimeInfo.TimeZone.Value!)));
 
         return options;
     }

@@ -21,12 +21,12 @@ public class VirusScanException : Exception
     /// <summary>
     /// Filename.
     /// </summary>
-    public string VirusName { get; set; }
+    public string? VirusName { get; set; }
 
     /// <summary>
     /// Raw.
     /// </summary>
-    public string Raw { get; set; }
+    public string? Raw { get; set; }
 
     /// <summary>
     /// Constructor.
@@ -34,7 +34,7 @@ public class VirusScanException : Exception
     /// <param name="type">The <see cref="ResultType"/>.</param>
     /// <param name="filename">The filename.</param>
     /// <param name="virusName">The virus name.</param>
-    public VirusScanException(ResultType type, string filename, string virusName = null)
+    public VirusScanException(ResultType type, string filename, string? virusName = null)
         : base($"Virus Scan: Result: {type}, File: {filename}, Virus: {virusName ?? "N/A"}")
     {
         this.Type = type;

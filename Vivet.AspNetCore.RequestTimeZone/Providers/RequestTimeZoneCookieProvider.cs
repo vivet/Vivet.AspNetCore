@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Vivet.AspNetCore.RequestTimeZone.Providers;
 
@@ -24,20 +24,21 @@ public class RequestTimeZoneCookieProvider : RequestTimeZoneProvider
     public string CookieName { get; set; } = RequestTimeZoneCookieProvider.defaultCookieName;
 
     /// <inheritdoc />
-    public override Task<ProviderTimeZoneResult> DetermineProviderTimeZoneResult(HttpContext httpContext)
+    public override async Task<ProviderTimeZoneResult?> DetermineProviderTimeZoneResult(HttpContext httpContext)
     {
-        if (httpContext == null)
-            throw new ArgumentNullException(nameof(httpContext));
+        ArgumentNullException.ThrowIfNull(httpContext);
 
         var value = httpContext.Request
             .Cookies[CookieName];
 
         if (string.IsNullOrEmpty(value))
-            return RequestTimeZoneProvider.nullProviderTimeZoneResult;
+        {
+            return null;
+        }
 
-        var providerTimeZoneResult = new ProviderTimeZoneResult(value.Replace("tz=", ""));
+        var providerTimeZoneResult = new ProviderTimeZoneResult(value.Replace(RequestTimeZoneCookieProvider.PREFIX, ""));
 
-        return Task.FromResult(providerTimeZoneResult);
+        return await Task.FromResult(providerTimeZoneResult);
     }
 
     /// <summary>
@@ -47,8 +48,7 @@ public class RequestTimeZoneCookieProvider : RequestTimeZoneProvider
     /// <returns>The cookie value.</returns>
     public static string MakeCookieValue(RequestTimeZone requestTimeZone)
     {
-        if (requestTimeZone == null)
-            throw new ArgumentNullException(nameof(requestTimeZone));
+        ArgumentNullException.ThrowIfNull(requestTimeZone);
 
         return $"{RequestTimeZoneCookieProvider.PREFIX}{requestTimeZone.TimeZone.Id}";
     }
