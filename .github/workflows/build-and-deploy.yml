@@ -8,7 +8,7 @@ on:
       - master 
 env:
   APP_NAME: Vivet.AspNetCore
-  VERSION: 10.0.5
+  VERSION: 10.0.6
   NUGET_HOST: https://api.nuget.org/v3/index.json
   NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
 jobs:
@@ -21,9 +21,6 @@ jobs:
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 10.0.x
 
       - name: Build and Test
         shell: pwsh
