@@ -24,7 +24,7 @@
 		<Summary>Middleware for handling timezone in http requests. Similar implementation as Microsoft.AspNetCore.Localization.</Summary>
 		<Description></Description>
 		<PackageReleaseNotes>
-			- Updated NuGets.
+			- Changed to Trusted publishing for NuGet
 		</PackageReleaseNotes>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryBranch>master</RepositoryBranch>
