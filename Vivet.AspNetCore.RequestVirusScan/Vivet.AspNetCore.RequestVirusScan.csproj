@@ -24,7 +24,7 @@
 		<Summary>Middleware for scanning uplaoded files for virusses</Summary>
 		<Description>Middleware for scanning uplaoded files for virusses.</Description>
 		<PackageReleaseNotes>
-			- Updated NuGets.
+			- Changed to Trusted publishing for NuGet
 		</PackageReleaseNotes>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryBranch>master</RepositoryBranch>
